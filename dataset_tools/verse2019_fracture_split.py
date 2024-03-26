@@ -1,14 +1,17 @@
 '''
-Description: 
-version: 
-Author: 
+Description: this file arrording the spine fracture xlsx to split verse2019.The xlsx file can be get in https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8082364/
+version: 1.0
+Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-25 06:52:45
+LastEditTime: 2024-03-26 13:36:49
 '''
 import sys
 import os
-sys.path.insert(0, os.path.dirname(sys.path[0]))
+current_file_path = os.path.abspath(__file__)
+project_root = os.path.dirname(os.path.dirname(current_file_path))
+if project_root not in sys.path:
+    sys.path.insert(0, os.path.dirname(sys.path[0]))
 from openpyxl import load_workbook
 from io_tools.file_management import load_json_file, save_json_file
 
@@ -56,24 +59,23 @@ def split_fracture_ct_dataset(xlsx_file, choosed_vertebrae_label_list):
     print(normal_dataset)
 
 
-def fracture_normal_label_conver(annotation_file, fracture_annotation_file):
+def fracture_normal_label_conver(xlsx_file, annotation_file, fracture_annotation_file):
     """
-    conver the T9-L6 to fracture and normal label
-    param: annotation_file: The detection annotation file.
+    conver the T9-L6 to fracture and normal label.
+    param: xlsx_file: The verse2019 fracture record file.
+    param: annotation_file: The drr images detection annotation file.
+    param: fracture_annotation_file: The fracture and normal label annotation file.
     """
     dataset = load_json_file(annotation_file)
-    for ann in dataset["annotations"]:
-        if ann["category_name"] == "L1":
-            ann["category_name"] == "fracture"
-            ann["category_id"] = 1
-        else:
-            ann["category_name"] == "normal"
-            ann["category_id"] == 2
-    save_json_file(dataset, annotation_file)
+    workbbok = load_workbook(xlsx_file, data_only=True)
+    sheet = workbbok.active
+    # get header
+    header = [cell.value for cell in sheet[1]]
+    save_json_file(dataset, fracture_annotation_file)
 
 
 
 if __name__ == "__main__":
-    split_fracture_ct_dataset("data/verse2019_fracture_grading_info.xlsx", 
+    split_fracture_ct_dataset("data/verse2019/verse2019_fracture_grading_info.xlsx", 
                               ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])
     # fracture_normal_label_conver("data/verse2019_drr/")
