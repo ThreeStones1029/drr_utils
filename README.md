@@ -161,7 +161,7 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 python visual_tools/vis_3d_point_and_mask.py
 ~~~
 ### 2.4.2.example.
-
+![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
 ## 2.5.3D visualization
 To be updated
 
