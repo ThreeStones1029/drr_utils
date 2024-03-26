@@ -1,0 +1,62 @@
+# 生成文件的保存路径
+dataset_parameter:
+  root_path: "data/Real_XRay/TD20240117"
+  images_folder: "images" # 生成的DRR路径
+  masks_folder: "masks" # 对应的每一节的mask
+  cut_images_folder: "cut_images" # 裁剪后DRR
+  cut_masks_folder: "cut_masks" # 裁剪后的mask
+  init_dataset_json: "init_dataset.json" # 初始数据集信息，记录DRR与mask对应关系
+  cut_dataset_json: "cut_dataset.json" # 裁剪数据集信息，记录裁剪DRR与裁剪mask信息，以及裁剪位置坐标信息
+
+# 检测参数
+object_detection_parameter:
+  run_object_detection: False # 是否运行目标检测
+
+  # 运行检测模型参数
+  envs_path: "/home/jjf/anaconda3/envs/rtdetr/bin/python"
+  detection_script_path: "/home/jjf/Desktop/RT-DETR/rtdetr_paddle/tools/infer.py"
+  config_path: "/home/jjf/Desktop/RT-DETR/rtdetr_paddle/configs/rtdetr/rtdetr_r50vd_6x_coco.yml"
+
+  infer_detection_result_folder: "detection_result" # 检测预测可视化
+  infer_bbox_json: "bbox.json" # 检测预测标注信息
+  gt_bbox_json: "gt_bbox.json" # 检测框GT标注信息
+  gt_bbox_vis_folder: "gt_bbox_vis" # 真实水平框可视化
+  gt_rotation_bbox_vis_folder: "gt_rotation_bbox_vis" # 真实旋转框可视化
+
+# 裁剪参数
+cut_parameter:
+  has_gt_masks: False
+  cut_mode: detection_bbox_center # mask_center detection_bbox_center
+  AP_expand_coefficient: 1.9
+  LA_expand_coefficient: 1.3
+  Minimum_width_relative_to_the_image: 0.15
+  Minimum_height_relative_to_the_image: 0.15
+
+# 分割参数
+segmentation_parameter:
+  run_segmentation: True # 是否运行分割
+
+  envs_path: "/home/jjf/anaconda3/envs/nnunet/bin/python"
+  segmentation_script_path: "/home/jjf/Desktop/nnUNet/nnunetv2/inference/predict_from_raw_data.py"
+  input_folder: "input_seg"
+
+  infer_segmentation_result_folder: "segmentation_result" # 分割预测mask
+  infer_mask_in_cut_image_vis_folder: "infer_cut_mask_vis" # 分割预测mask可视化在裁剪图片上
+  infer_mask_in_image_vis_folder: "infer_mask_vis" # 分割预测mask可视化在裁剪图片上
+  gt_mask_in_cut_image_vis_folder: "gt_cut_mask_vis" # 分割真实mask可视化在裁剪图片上
+  gt_mask_in_image_vis_folder: "gt_mask_vis" # 分割真实mask可视化在整张图片上
+
+# 评估参数
+eval_parameter:
+  is_detection_eval: True # 是否评估检测
+  is_segmentation_eval: True # 是否评估分割
+  eval_result_save_json: "eval_result.json" # 评估结果保存路径
+
+
+# 可视化参数
+vis_parameter:
+  is_vis_detection_gt: True # 是否可视化检测真实标注
+  is_vis_detection_infer: True # 是否可视化检测预测标注
+  is_vis_segmentation_gt: True # 是否可视化分割真实标注
+  is_vis_segmentation_infer: True # 是否可视化分割预测标注
+  is_gen_html: True # 是否生成可视化网页

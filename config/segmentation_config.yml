@@ -1,0 +1,35 @@
+data_root_path: data
+ct_mask_path: data/ct_mask
+dataset_save_root_folder_name: detection_segmentation
+APorLA_orientation: AP # AP LA all
+mask_categories: ["whole"] # whole body pedicle other
+nii_preproess: False
+has_pedicle: True
+
+# 3D to 2d parameter
+projection_parameter:
+  sdr: 500
+  height: 2000
+  specific_height_list: {"chen_jing": 3000, "chen_min_hua": 2500, "hang_hui_fang": 1000, "wang_xing_di": 1000, "xu_ye": 3000, "zhang_jian_min": 2500, "zhou_yuan_ying": 1000}
+  delx: 0.25
+  threshold: 0
+  AP_num_samples: 1
+  LA_num_samples: 1
+  AP_rot_range_list : [[85, 95], [160, 200], [175, 185]]
+  AP_trans_range_list : [[-20, 20], [-20, 20], [-20, 20]]
+  LA_rot_range_list: [[85, 95], [160, 200], [85, 95]]
+  LA_trans_range_list: [[-20, 20], [-20, 20], [-20, 20]]
+  min_bbox_percentage_of_height: 0.05
+  
+# Mode of clipping
+cut_parameter:
+  cut_mode: detection_bbox_center # mask_center detection_bbox_center
+  detection_result_json_path: data/detection_segmentation/AP/detection_result/bbox.json
+  run_object_detection: False
+  AP_expand_coefficient: 1.9
+  LA_expand_coefficient: 1.3
+  Minimum_width_relative_to_the_image: 0.15
+  Minimum_height_relative_to_the_image: 0.15
+
+vis_parameter:
+  is_vis: True

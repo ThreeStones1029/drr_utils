@@ -1,0 +1,20 @@
+# 生成文件的保存路径
+dataset_parameter:
+  root_path: "data/segmentation_dataset/all512"
+  images_folder: "images" # 生成的DRR路径
+  masks_folder: "masks" # 对应的每一节的mask
+  single_vertebrae_images_folder: "single_vertebrae_images" # 置零的单节drr
+  detection_result_folder: "detection_result" # 检测结果
+  AP_expand_coefficient: 1.9
+  LA_expand_coefficient: 1.3
+  Minimum_width_relative_to_the_image: 0.15
+  Minimum_height_relative_to_the_image: 0.15
+
+# 检测参数
+object_detection_parameter:
+  run_object_detection: True # 是否运行目标检测
+  # 运行检测模型参数
+  envs_path: "/home/jjf/anaconda3/envs/paddle/bin/python"
+  detection_script_path: "/home/jjf/RT-DETR/rtdetr_paddle/tools/infer.py"
+  config_path: "/home/jjf/RT-DETR/rtdetr_paddle/configs/rtdetr/rtdetr_r50vd_6x_coco.yml"
+  bbox_json_file: "bbox.json"
