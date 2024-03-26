@@ -4,7 +4,7 @@
  * @Author: ShuaiLei
  * @Date: 2023-12-06 11:21:07
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-03-23 07:22:34
+ * @LastEditTime: 2024-03-26 13:00:17
 -->
 ---
 layout:     post   				    # 使用的布局（不需要改）
@@ -292,7 +292,7 @@ CT数量：98例
 
 # 五、verse2019生成骨折drr数据集以及标注
 ## 5.1.先筛选出数据集
-
+目前筛选出来大概要33例数据
 ## 5.2.正常生成检测数据集标注
 
 ## 5.3.根据论文A Vertebral Segmentation Dataset with Fracture Grading附件中的对于椎体标注
