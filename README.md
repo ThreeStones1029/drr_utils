@@ -155,8 +155,13 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" style="flex: 20%; padding: 5px;">
 </div>
 
-## 2.4.Keypoints
-To be updated
+## 2.4.3D points and mask project in 2D image.
+### 2.4.1.run command
+~~~bash
+python visual_tools/vis_3d_point_and_mask.py
+~~~
+### 2.4.2.example.
+
 ## 2.5.3D visualization
 To be updated
 
