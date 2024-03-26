@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 16:24:26
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-25 10:35:36
+LastEditTime: 2024-03-26 13:52:55
 '''
 import os
 import glob
@@ -176,9 +176,19 @@ def pngs2niis(png_folder, nii_folder):
             nii_file_name = basename_no_ext + ".nii.gz"
             png2nii(join(png_folder, file_name), join(nii_folder, nii_file_name))
 
+
+def crop_nii_according_vertebrae_label(input_folder, output_folder, vertebrae_label_list):
+    """
+    The function will be used to crop nii file.
+    param: input_folder: The ct dataset input root folder.
+    param: output_folder: The cropped ct dataset output root folder.
+    param: vertebrae_label_list: The vertebrae label in ct after cropped. 
+    """
+    sub_folder_paths = get_sub_folder_paths(input_folder)
+
     
 if __name__ == "__main__":
-    # crop_nii("data/ct_mask/yang_zhen_mei/yang_zhen_mei.nii.gz")
     # nii_tools = NiiTools("data/ct_mask_test")
     # nii_tools.extract_largest_volume_objects()
-    nii2png("nii_tools/weng_gt_drr.nii.gz", "nii_tools/weng_gt_drr.png")
+    # nii2png("nii_tools/weng_gt_drr.nii.gz", "nii_tools/weng_gt_drr.png")
+    crop_nii_according_vertebrae_label()

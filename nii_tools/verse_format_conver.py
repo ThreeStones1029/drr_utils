@@ -36,18 +36,20 @@ class VerseFormatConver:
             file_path = nii_file_paths[0]
             seg_image = sitk.ReadImage(file_path)
             cats_info = load_json_file(json_paths[0])
-            choosed = self.choose_lumbar_and_lower_thoracic_ct(cats_info)
+            # choosed = self.choose_lumbar_and_lower_thoracic_ct(cats_info)
+            choosed = True # all ct will be choosed
             if choosed:
                 for cat_info in cats_info:
-                    catid = cat_info["label"]
-                    catname = self.catid2catname[catid]
-                    vertebrae_mask_array = sitk.GetArrayFromImage(seg_image==catid)
-                    vertebrae_image = sitk.GetImageFromArray(vertebrae_mask_array)
-                    vertebrae_image.SetSpacing(seg_image.GetSpacing())
-                    vertebrae_image.SetOrigin(seg_image.GetOrigin())
-                    vertebrae_image.SetDirection(seg_image.GetDirection())
-                    vertebrae_image_save_path = join(path, catname + "_seg.nii.gz")
-                    sitk.WriteImage(vertebrae_image, vertebrae_image_save_path)
+                    if "label" in cat_info.keys():
+                        catid = cat_info["label"]
+                        catname = self.catid2catname[catid]
+                        vertebrae_mask_array = sitk.GetArrayFromImage(seg_image==catid)
+                        vertebrae_image = sitk.GetImageFromArray(vertebrae_mask_array)
+                        vertebrae_image.SetSpacing(seg_image.GetSpacing())
+                        vertebrae_image.SetOrigin(seg_image.GetOrigin())
+                        vertebrae_image.SetDirection(seg_image.GetDirection())
+                        vertebrae_image_save_path = join(path, catname + "_seg.nii.gz")
+                        sitk.WriteImage(vertebrae_image, vertebrae_image_save_path)
                 os.remove(file_path)
             else:
                 print(sub_folder_name, "not lumbar or lower thoracic so don't need it!")
@@ -62,7 +64,7 @@ class VerseFormatConver:
         """
         choosed = True
         for cat_info in cats_info:
-            if cat_info["label"] <= 15 or cat_info["label"] >= 26:
+            if "label" in cat_info.keys() and (cat_info["label"] <= 15 or cat_info["label"] >= 26):
                 choosed = False
         return choosed
 
@@ -127,6 +129,27 @@ def rename_cts(root_path):
             os.rename(join(sub_folder_path, file), join(sub_folder_path, new_file))
 
 
+def rename_verse2019_cts(root_path):
+    """
+    The function will used to rename verse2019 ct mask png json.
+    """
+    sub_folder_paths = get_sub_folder_paths(root_path) 
+    for sub_folder_path in tqdm(sub_folder_paths, desc="renaming"):
+        ct_folder_name = os.path.basename(sub_folder_path)
+        for file in os.listdir(sub_folder_path):
+            if file.endswith("ct.nii.gz"):
+                new_file = ct_folder_name + ".nii.gz"
+            if file.endswith("msk.nii.gz"):
+                new_file = ct_folder_name + "_seg.nii.gz"
+            if file.endswith(".png"):
+                new_file = ct_folder_name + ".png"
+            if file.endswith("w.png"):
+                new_file = ct_folder_name + "_w.png"
+            if file.endswith("ctd.json"):
+                new_file = ct_folder_name + ".json"
+            os.rename(join(sub_folder_path, file), join(sub_folder_path, new_file))
+
+
 def ct_dataset_statistics(ct_dataset_path, statistics_information_json_path):
     """
     数据集CT椎体标签统计
@@ -155,4 +178,5 @@ def ct_dataset_statistics(ct_dataset_path, statistics_information_json_path):
 if __name__ == "__main__":
     # format_conver = VerseFormatConver("data/verse")
     # format_conver.run()
-    ct_dataset_statistics("data/verse", "data/verse/vertebrae_information.json")
+    # ct_dataset_statistics("data/verse", "data/verse/vertebrae_information.json")
+    rename_verse2019_cts("data/verse2019")
