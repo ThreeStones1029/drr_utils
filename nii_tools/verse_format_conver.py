@@ -2,12 +2,30 @@ from logging import root
 import os
 import sys
 import json
-sys.path.insert(0, sys.path.append(os.path.dirname(sys.path[0])))
+current_file_path = os.path.abspath(__file__)
+project_root = os.path.dirname(os.path.dirname(current_file_path))
+if project_root not in sys.path:
+    sys.path.insert(0, os.path.dirname(sys.path[0]))
 import SimpleITK as sitk
 from tqdm import tqdm
 import numpy as np
 import shutil
 from io_tools.file_management import get_sub_folder_paths, get_subfiles, load_json_file, join, create_folder, save_json_file
+
+
+class VerseCategoriesFormat:
+    def __init__(self):
+        self.catid2catname = {1: "C1", 2: "C2", 3: "C3", 4: "C4", 5: "C5", 6: "C6", 7: "C7",
+                              8: "T1", 9: "T2", 10: "T3", 11: "T4", 12: "T5", 13: "T6", 14: "T7", 15: "T8", 16: "T9", 17: "T10", 18: "T11", 19: "T12",
+                              20: "L1", 21: "L2", 22: "L3", 23: "L4", 24: "L5", 25: "L6",
+                              26: "sacrum", 27: "cocygis", 28: "T13"}
+        self.catname2catid = {name: id for id, name in self.catid2catname.items()}
+
+    def get_catid2catname(self):
+        return self.catid2catname
+    
+    def get_catname2catid(self):
+        return self.catname2catid
 
 
 class VerseFormatConver:
@@ -16,11 +34,7 @@ class VerseFormatConver:
     """
     def __init__(self, root_path):
         self.root_path = root_path
-        self.catid2catname = {1: "C1", 2: "C2", 3: "C3", 4: "C4", 5: "C5", 6: "C6", 7: "C7",
-                              8: "T1", 9: "T2", 10: "T3", 11: "T4", 12: "T5", 13: "T6", 14: "T7", 15: "T8", 16: "T9", 17: "T10", 18: "T11", 19: "T12",
-                              20: "L1", 21: "L2", 22: "L3", 23: "L4", 24: "L5", 25: "L6",
-                              26: "sacrum", 27: "cocygis", 28: "T13"}
-
+        self.catid2catname = VerseCategoriesFormat().get_catid2catname()
     
     def run(self):
         sub_folder_paths = get_sub_folder_paths(self.root_path) 
