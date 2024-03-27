@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-10 14:04:34
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-23 11:59:17
+LastEditTime: 2024-03-27 02:33:38
 '''
 import os
 import platform
@@ -87,13 +87,13 @@ def get_sub_folder_paths(root_folder):
 
 
 def get_subfiles(image_folder, suffix=None, sort=True):
-        """
-        get all png files in folder
-        """
-        imgs_path = glob(join(image_folder, "*" + suffix)) 
-        if sort:
-            imgs_path.sort()
-        return imgs_path
+    """
+    get all png files in folder
+    """
+    imgs_path = glob(join(image_folder, "*" + suffix)) 
+    if sort:
+        imgs_path.sort()
+    return imgs_path
 
 
 def subtract_whole_in_suffix(images_folder):  

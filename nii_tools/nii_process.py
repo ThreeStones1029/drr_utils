@@ -4,18 +4,19 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 16:24:26
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-26 13:52:55
+LastEditTime: 2024-03-27 05:43:39
 '''
 import os
 import glob
 import sys
 sys.path.insert(0, sys.path.append(os.path.dirname(sys.path[0])))
-from io_tools.file_management import get_sub_folder_paths, join
+from io_tools.file_management import get_sub_folder_paths, join, get_subfiles, load_json_file
 import nibabel as nib
 import SimpleITK as sitk
 import numpy as np
 from tqdm import tqdm
 from PIL import Image
+from collections import defaultdict
 
 
 class GenPedicles:
@@ -177,18 +178,41 @@ def pngs2niis(png_folder, nii_folder):
             png2nii(join(png_folder, file_name), join(nii_folder, nii_file_name))
 
 
-def crop_nii_according_vertebrae_label(input_folder, output_folder, vertebrae_label_list):
+def crop_nii_according_vertebrae_label(input_folder, output_folder, vertebrae_label_list, verbose=True):
     """
     The function will be used to crop nii file.
     param: input_folder: The ct dataset input root folder.
     param: output_folder: The cropped ct dataset output root folder.
     param: vertebrae_label_list: The vertebrae label in ct after cropped. 
     """
+    catid2catname = {1: "C1", 2: "C2", 3: "C3", 4: "C4", 5: "C5", 6: "C6", 7: "C7",
+                     8: "T1", 9: "T2", 10: "T3", 11: "T4", 12: "T5", 13: "T6", 14: "T7", 15: "T8", 16: "T9", 17: "T10", 18: "T11", 19: "T12",
+                     20: "L1", 21: "L2", 22: "L3", 23: "L4", 24: "L5", 25: "L6",
+                     26: "sacrum", 27: "cocygis", 28: "T13"}
     sub_folder_paths = get_sub_folder_paths(input_folder)
+    need_to_crop_ct_path_dict = defaultdict(list)
+    for sub_folder_path in sub_folder_paths:
+        json_files = get_subfiles(sub_folder_path, ".json")
+        ct_name = os.path.basename(sub_folder_path)
+        vertebrae_center_label_data = load_json_file(json_files[0])
+        for point_data in vertebrae_center_label_data:
+            if "label" in point_data and catid2catname[point_data["label"]] not in vertebrae_label_list:
+                need_to_crop_ct_path_dict[join(sub_folder_path, ct_name + ".nii.gz")].append(catid2catname[point_data["label"]])
+
+    for need_to_crop_ct_path, not_need_cat_name_list in need_to_crop_ct_path_dict.items():
+        # file_path = os.path.dirname(need_to_crop_ct_path ) # 获取当前文件所在的目录路径
+        image_total = sitk.ReadImage(need_to_crop_ct_path)
+        if verbose:
+            print("need_to_crop_ct_path: ", need_to_crop_ct_path)
+            print("not_need_cat_name_list: ", not_need_cat_name_list)
+            print("size: ", image_total.GetSize())
+            print("spacing: ", image_total.GetSpacing())
+            print("\n")
+
 
     
 if __name__ == "__main__":
     # nii_tools = NiiTools("data/ct_mask_test")
     # nii_tools.extract_largest_volume_objects()
     # nii2png("nii_tools/weng_gt_drr.nii.gz", "nii_tools/weng_gt_drr.png")
-    crop_nii_according_vertebrae_label()
+    crop_nii_according_vertebrae_label("data/verse2019", "data/verse2019", ["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])

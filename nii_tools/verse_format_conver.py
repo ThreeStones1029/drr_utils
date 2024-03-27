@@ -176,7 +176,7 @@ def ct_dataset_statistics(ct_dataset_path, statistics_information_json_path):
 
 
 if __name__ == "__main__":
-    # format_conver = VerseFormatConver("data/verse")
-    # format_conver.run()
+    format_conver = VerseFormatConver("data/verse2019")
+    format_conver.run()
     # ct_dataset_statistics("data/verse", "data/verse/vertebrae_information.json")
-    rename_verse2019_cts("data/verse2019")
+    # rename_verse2019_cts("data/verse2019")
