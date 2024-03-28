@@ -4,7 +4,7 @@ version:
 Author: According https://github.com/anjany/verse modify
 Date: 2024-03-25 08:57:02
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-26 08:10:42
+LastEditTime: 2024-03-28 06:23:40
 '''
 import os
 import sys
@@ -303,8 +303,8 @@ if __name__ == "__main__":
     # define HU windows
     wdw_sbone = Normalize(vmin=-500, vmax=1300, clip=True)
     wdw_hbone = Normalize(vmin=-200, vmax=1000, clip=True)
-    image_path = "data/verse2019_test/sub-verse012/sub-verse012_ct.nii.gz"
-    mask_path = "data/verse2019_test/sub-verse012/sub-verse012_seg-vert_msk.nii.gz"
-    json_path = "data/verse2019_test/sub-verse012/sub-verse012_seg-subreg_ctd.json"
-    vis_save_path = "data/verse2019_test/sub-verse012/sub-verse012_verse.png"
+    image_path = "data/verse2019/sub-verse009/sub-verse009bottom.nii.gz"
+    mask_path = "data/verse2019/sub-verse009/sub-verse009bottom_seg.nii.gz"
+    json_path = "data/verse2019/sub-verse009/sub-verse009bottom.json"
+    vis_save_path = "data/verse2019/sub-verse009/sub-verse009bottom.png"
     main(image_path, mask_path, json_path, vis_save_path)

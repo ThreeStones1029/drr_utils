@@ -1,15 +1,38 @@
-# Deep Learning DRR Toolkit
+# Deep Learning Spine DRR Toolkit
 
 # 1、Introduction
-This repository mainly uses ITK to generate DRR, as well as the corresponding keypoints, detection boxes, and segmentation mask annotations. The generated dataset can be used for pre-trained model training to improve the robustness of deep learning
+This repository mainly uses ITK to generate DRR, as well as the corresponding keypoints, detection boxes, and segmentation mask annotations. The generated dataset can be used for pre-trained model training to improve the robustness of deep learning.
 
 # 2、Using
 ## 2.1.Preliminary preparation
 ### 2.1.1.ITK tool installation
 [Official zip download address](https://docs.itk.org/en/latest/download.html)
-* windows：You can skip this step without installing ITK
-* linux：Need to compile and install ITK tool, for specific installation can refer to[itkSoftwareGuide](https://itk.org/ItkSoftwareGuide.pdf)
-### 2.1.2.CT Dataset
+* windows：You can skip this step without installing ITK.
+* linux：Need to compile and install ITK tool, for specific installation can refer to [itkSoftwareGuide.](https://itk.org/ItkSoftwareGuide.pdf)
+
+## 2.2.Dataset prepare
+### 2.2.1.Download
+Spine Dataset
+* [verse2019 and verse2020](https://github.com/anjany/verse)
+
+* [CTSpine1K](https://github.com/MIRACLE-Center/CTSpine1K)
+### 2.2.2.Reoriented
+This code uses 3D projection to 2D for annotation, and requires the original CT, as well as the segmented mask. The all CT and mask will be asked to reoriented same direction and same origin.run the following command:
+~~~bash
+python nii_tools/reoriented_images.py
+~~~
+### 2.2.4.Crop image
+Sometimes common data sets need to be cropped to facilitate the generation of the desired DRRs.
+~~~bash
+python nii_tools/crop_images.py
+~~~
+
+### 2.4.5.merge mask
+Sometimes you need to merge masks.
+~~~bash
+python nii_tools/merge_images.py
+~~~
+### 2.2.5.Dataset format
 This code uses 3D projection to 2D for annotation, and requires the original CT, as well as the segmented mask. Put the data in the **data** folder. The placement format is as follows:
 ~~~bash
 ├── ct_dataset1
@@ -47,9 +70,7 @@ This code uses 3D projection to 2D for annotation, and requires the original CT,
     │   └── example2.nii.gz
 ~~~
 **Where example1 is the subfolder of a CT and the segmented mask, the ct name must be the same as the subfolder name.**
-### 2.1.3.verse2020 datset
-You can use this **nii_tools/verse_format_conver.py** to convert the verse2020 dataset to this format
-More explanation to be updated
+
 ## 2.2.Detection
 ### 2.2.1.Dataset generate
 Running the command:
@@ -155,13 +176,22 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" style="flex: 20%; padding: 5px;">
 </div>
 
-## 2.4.3D points and mask project in 2D image.
+# 2.1.3.verse datset
+You can use this **nii_tools/verse_format_conver.py** to convert the verse2020 dataset to this format
+More explanation to be updated
+#
+## 2.4.
 ### 2.4.1.run command
+you need prepare
+- (1) json file
+
 ~~~bash
 python visual_tools/vis_3d_point_and_mask.py
 ~~~
-### 2.4.2.example.
+### 2.4.2.3D points and mask project in 2D image.
 ![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
+
+## 2.5.crop verse2019
 ## 2.5.3D visualization
 To be updated
 

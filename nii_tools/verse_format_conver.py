@@ -5,7 +5,7 @@ import json
 current_file_path = os.path.abspath(__file__)
 project_root = os.path.dirname(os.path.dirname(current_file_path))
 if project_root not in sys.path:
-    sys.path.insert(0, os.path.dirname(sys.path[0]))
+    sys.path.insert(0, project_root)
 import SimpleITK as sitk
 from tqdm import tqdm
 import numpy as np
