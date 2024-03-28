@@ -27,12 +27,12 @@ Sometimes common data sets need to be cropped to facilitate the generation of th
 python nii_tools/crop_images.py
 ~~~
 
-### 2.4.5.merge mask
+### 2.2.5.merge mask
 Sometimes you need to merge masks.
 ~~~bash
 python nii_tools/merge_images.py
 ~~~
-### 2.2.5.Dataset format
+### 2.2.6.Dataset format
 This code uses 3D projection to 2D for annotation, and requires the original CT, as well as the segmented mask. Put the data in the **data** folder. The placement format is as follows:
 ~~~bash
 ├── ct_dataset1
@@ -71,15 +71,30 @@ This code uses 3D projection to 2D for annotation, and requires the original CT,
 ~~~
 **Where example1 is the subfolder of a CT and the segmented mask, the ct name must be the same as the subfolder name.**
 
-## 2.2.Detection
-### 2.2.1.Dataset generate
+### 2.2.7.verse mask format.
+In order to better adapt to the verse format, the mask of each vertebra can be unified in a nii file without separating it.
+~~~bash
+├── ct_dataset1
+    ├── example1
+    │   ├── example1_seg.nii.gz
+    │   ├── example1.json
+    │   ├── example1.png
+    │   └── example1.nii.gz
+    ├── example2
+    │   ├── example2_seg.nii.gz
+    │   ├── example2.json
+    │   ├── example2.png
+    │   └── example2.nii.gz
+~~~
+
+## 2.3.Detection(Each vertebra is separated in mask format)
+### 2.3.1.Dataset generate
 Running the command:
 ~~~python
 python main_drr_detection_dataset.py -c config/detection_config.yml
 ~~~
-### 2.2.2.Parameter Configuration Description(detection_config.yml)
+### 2.3.2.Parameter Configuration Description(detection_config.yml)
 The basic parameters are stored in config/detection_config.yml.The parameters are explained as follows:
-
 ~~~bash
 ct_root_path: data/verse2020  # ct root folder
 dataset_path: data/verse2020_detection_dataset # The generated dataset save path
@@ -108,26 +123,29 @@ vis_parameter:
   vis_save_path: data/verse2020_detection_dataset/bbox_vis
   rotation_bbox_vis_save_path: data/verse2020_detection_dataset/rotation_bbox_vis # vis rotate bbox
 ~~~
-### 2.2.3.Code that is accidentally broken can be regenerated
+### 2.3.3.Code that is accidentally broken can be regenerated
 The generated json file will be automatically saved after each CT generation. Due to accidental termination or active interruption, the generation can continue, and it is necessary to continue to generate and re-run the command
 ~~~bash
 python main_drr_detection_dataset.py -c config/detection_config.yml
 ~~~
 **Note:If you want to regenerate a larger dataset after generating it, you need to delete detection_data.json under data/verse2020_detection_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, starting from the CT that has not been projected.**
 
-### 2.2.4.example
+### 2.3.4.example
 <div style="display: flex;">
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_AP_1.png" alt="Image 1" style="flex: 50%; padding: 5px;">
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_LA_1.png" alt="Image 2" style="flex: 50%; padding: 5px;">
 </div>
 
-## 2.3.Segmantation
-### 2.3.1.Dataset generate
+## 2.4.detection(verse mask format)
+To be updated!
+
+## 2.5.Segmantation(Each vertebra is separated in mask format)
+### 2.5.1.Dataset generate
 Running the command:
 ~~~python
 python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 ~~~
-### 2.3.2.Parameter Configuration Description(segmentation_config.yml)
+### 2.5.2.Parameter Configuration Description(segmentation_config.yml)
 The basic parameters are stored in config/segmentation_config.yml.The parameters are explained as follows:
 ~~~bash
 data_root_path: data # data root folder
@@ -163,35 +181,30 @@ cut_parameter:
 vis_parameter:
   is_vis: True # Whether or not to visualize labels
 ~~~
-### 2.3.3.Code that is accidentally broken can be regenerated
+### 2.5.3.Code that is accidentally broken can be regenerated
 The generated json file will be automatically saved after each CT generation. Due to accidental termination or active interruption, the generation can continue, and it is necessary to continue to generate and re-run the command
 ~~~bash
 python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 ~~~
 **Note: If you want to regenerate a larger dataset after generating it, you need to delete all json files under data/verse2020_segmentation_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, and the CT that has not been projected will be started from the CT that has not been projected.**
 
-### 2.3.4.example
+### 2.5.4.example
 <div style="display: flex;">
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" style="flex: 20%; padding: 5px;">
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" style="flex: 20%; padding: 5px;">
 </div>
 
-# 2.1.3.verse datset
-You can use this **nii_tools/verse_format_conver.py** to convert the verse2020 dataset to this format
-More explanation to be updated
-#
-## 2.4.
-### 2.4.1.run command
-you need prepare
-- (1) json file
+## 2.6.Segmantation(verse mask format)
+to be updated!
 
+## 2.7.Visualize 3d mask and point in 2d image.
+### 2.7.1.run command
 ~~~bash
 python visual_tools/vis_3d_point_and_mask.py
 ~~~
-### 2.4.2.3D points and mask project in 2D image.
+### 2.7.2.3D points and mask project in 2D image.
 ![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
 
-## 2.5.crop verse2019
-## 2.5.3D visualization
+## 2.8.3D visualization
 To be updated
 
