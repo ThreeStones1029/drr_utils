@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-28 07:39:57
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-28 07:44:28
+LastEditTime: 2024-03-28 12:09:39
 '''
 import os
 import sys
@@ -16,14 +16,15 @@ import SimpleITK as sitk
 from nii_tools.verse_format_conver import VerseCategoriesFormat
 
 
-def sitk_merge_masks(mask_path_list, merged_mask_nii_path):
+def sitk_merge_masks(image_path, mask_path_list, merged_mask_nii_path):
     """
     Using sitk.
     The function will used to merge seg mask.
+    param: image_path: The ct image path.
     param: mask_path_list: The seg mask file path list.
     param: merged_mask_nii_path: The merged seg file save path.
     """
-    image = sitk.ReadImage("data/verse2019/sub-verse009/sub-verse009bottom.nii.gz")
+    image = sitk.ReadImage(image_path)
     first_mask = sitk.ReadImage(mask_path_list[0])
     first_mask_array = sitk.GetArrayFromImage(first_mask)
     catname = os.path.basename(mask_path_list[0]).split("_")[0]
@@ -39,9 +40,6 @@ def sitk_merge_masks(mask_path_list, merged_mask_nii_path):
         mask_array[mask_array==1] = catname2catid[catname]
         mask = sitk.GetImageFromArray(mask_array)
         merged_mask += mask
-    # merged_mask.SetOrigin(first_mask.GetOrigin())
-    # merged_mask.SetDirection(first_mask.GetDirection())
-    # merged_mask.SetSpacing(first_mask.GetSpacing())
     merged_mask.SetOrigin(image.GetOrigin())
     merged_mask.SetDirection(image.GetDirection())
     merged_mask.SetSpacing(image.GetSpacing())
@@ -50,8 +48,7 @@ def sitk_merge_masks(mask_path_list, merged_mask_nii_path):
     # print(labels)
     sitk.WriteImage(merged_mask, merged_mask_nii_path)
     
-
-    
+ 
 def nibabel_merge_masks(seg_mask_path_list, merge_seg_nii_path):
     """
     Using nibabel.
@@ -60,11 +57,23 @@ def nibabel_merge_masks(seg_mask_path_list, merge_seg_nii_path):
 
 
 if __name__ == "__main__":
-    sitk_merge_masks(["data/verse2019/sub-verse009/T10_seg.nii.gz",
-                      "data/verse2019/sub-verse009/T11_seg.nii.gz",
-                      "data/verse2019/sub-verse009/T12_seg.nii.gz",
-                      "data/verse2019/sub-verse009/L1_seg.nii.gz",
-                      "data/verse2019/sub-verse009/L2_seg.nii.gz",
-                      "data/verse2019/sub-verse009/L3_seg.nii.gz",
-                      "data/verse2019/sub-verse009/L4_seg.nii.gz",
-                      "data/verse2019/sub-verse009/L5_seg.nii.gz"], "data/verse2019/sub-verse009/sub-verse009bottom_seg.nii.gz")
+    sitk_merge_masks("data/verse2019/sub-verse004/sub-verse004.nii.gz",
+                     ["data/verse2019/sub-verse004/T9_seg.nii.gz",
+                      "data/verse2019/sub-verse004/T10_seg.nii.gz",
+                      "data/verse2019/sub-verse004/T11_seg.nii.gz",
+                      "data/verse2019/sub-verse004/T12_seg.nii.gz",
+                      "data/verse2019/sub-verse004/L1_seg.nii.gz",
+                      "data/verse2019/sub-verse004/L2_seg.nii.gz",
+                      "data/verse2019/sub-verse004/L3_seg.nii.gz",
+                      "data/verse2019/sub-verse004/L4_seg.nii.gz",
+                      "data/verse2019/sub-verse004/L5_seg.nii.gz"], "data/verse2019/sub-verse004/sub-verse004_seg.nii.gz")
+    
+    # sitk_merge_masks("data/verse2019/sub-verse009/sub-verse009bottom.nii.gz",
+    #                  ["data/verse2019/sub-verse009/T10_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/T11_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/T12_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/L1_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/L2_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/L3_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/L4_seg.nii.gz",
+    #                   "data/verse2019/sub-verse009/L5_seg.nii.gz"], "data/verse2019/sub-verse009/sub-verse009bottom_seg.nii.gz")

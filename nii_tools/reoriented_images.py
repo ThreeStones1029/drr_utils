@@ -4,7 +4,7 @@ version:
 Author: 
 Date: 2024-03-23 07:14:28
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-26 08:49:23
+LastEditTime: 2024-03-28 14:20:36
 '''
 import sys
 import os
@@ -132,4 +132,4 @@ def reoriented_images(input_folder, output_folder):
 
 
 if __name__ == "__main__":
-    reoriented_images("data/verse2019_test","data/verse2019_test")
+    reoriented_images("data/verse2019","data/verse2019")

@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-26 13:36:49
+LastEditTime: 2024-03-28 11:50:33
 '''
 import sys
 import os
@@ -20,8 +20,7 @@ def split_fracture_ct_dataset(xlsx_file, choosed_vertebrae_label_list):
     """
     load xlsx file to split verse2019 dataset.
     param: xlsx_file: A document that records specific fracture information.
-    param: choosed_vertebrae_label_list: 
-
+    param: choosed_vertebrae_label_list: The list of selected vertebrae have fracture vertebrae.
     """
     fracture_grad1_dataset = []
     fracture_grad2_dataset = []
@@ -48,7 +47,6 @@ def split_fracture_ct_dataset(xlsx_file, choosed_vertebrae_label_list):
                 fracture_grad1_dataset.append(ct_name)
         if row[0] != None and row[header.index('N_Fx')] == 0:
             normal_dataset.append(ct_name)
-        
     print("CT Facture grad = 3 number is: ", len(fracture_grad3_dataset))
     print(fracture_grad3_dataset)
     print("CT Facture grad = 2 number is: ", len(fracture_grad2_dataset))

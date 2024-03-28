@@ -30,22 +30,31 @@ def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbo
 
     for need_to_crop_ct_path, not_need_cat_name_list in need_to_crop_ct_path_dict.items():
         image_total = sitk.ReadImage(need_to_crop_ct_path)
-        json_data = load_json_file(get_subfiles(os.path.dirname(need_to_crop_ct_path), ".json")[0])
+        ct_name = os.path.basename(need_to_crop_ct_path)
+        mask_path = join(os.path.dirname(need_to_crop_ct_path), ct_name.split(".")[0] + "_seg.nii.gz")
+        mask_total = sitk.ReadImage(mask_path)
+        json_path = get_subfiles(os.path.dirname(need_to_crop_ct_path), ".json")[0]
+        json_data = load_json_file(json_path)
         size = image_total.GetSize()
         spacing = image_total.GetSpacing()
+        orientation = json_data[0]["direction"]
+        print(orientation)
         for point_data in json_data:
             # from T9 crop
             if "label" in point_data and catid2catname[point_data["label"]] == vertebrae_label_list[0]:
                 print(point_data["X"] / spacing[0], point_data["Y"] / spacing[1], point_data["Z"] / spacing[2])
-                crop_z = point_data["Y"] / spacing[1]
-                image_bottom = image_total[:, int(crop_z):, :]
-                basename_wo_ext = os.path.basename(need_to_crop_ct_path).split(".")[0]
-                print(join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom.nii.gz"))
-                image_bottom.SetOrigin(image_total.GetOrigin())
-                image_bottom.SetDirection(image_total.GetDirection())
-                image_bottom.SetSpacing(image_total.GetSpacing())
-                sitk.WriteImage(image_bottom, join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom.nii.gz"))
-
+                if orientation != ['L', 'P', 'S']:
+                    raise ValueError("orientation != ['L', 'P', 'S'], please check {}".format(json_path))
+                else:
+                    crop_z = point_data["Z"] / spacing[2]
+                    image_bottom = image_total[:, :, :int(crop_z)]
+                    mask_bottom = mask_total[:, :, :int(crop_z)]
+                    basename_wo_ext = os.path.basename(need_to_crop_ct_path).split(".")[0]
+                    print(join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom.nii.gz"))
+                    print(join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom_seg.nii.gz"))
+                    # save cropped image and mask
+                    sitk.WriteImage(image_bottom, join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom.nii.gz"))
+                    sitk.WriteImage(mask_bottom, join(os.path.dirname(need_to_crop_ct_path), basename_wo_ext + "bottom_seg.nii.gz"))
         if verbose:
             print("need_to_crop_ct_path: ", need_to_crop_ct_path)
             print("not_need_cat_name_list: ", not_need_cat_name_list)
@@ -56,3 +65,9 @@ def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbo
 
 if __name__ == "__main__":
     crop_nii_according_vertebrae_label("data/verse2019",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])
+    # image = sitk.ReadImage("data/verse2019/sub-verse009/sub-verse009bottom.nii.gz")
+    # mask = sitk.ReadImage("data/verse2019/sub-verse009/sub-verse009bottom_seg.nii.gz")
+    # print(image.GetSize())
+    # print(image.GetSpacing())
+    # print(mask.GetSize())
+    
