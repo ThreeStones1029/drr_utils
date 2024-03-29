@@ -7,7 +7,7 @@ if project_root not in sys.path:
 from io_tools.file_management import get_sub_folder_paths, join, get_subfiles, load_json_file
 import SimpleITK as sitk
 from collections import defaultdict
-from nii_tools.verse_format_conver import VerseCategoriesFormat
+from drr_utils.nii_tools.verse_separate_mask import VerseCategoriesFormat
 
 
 def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbose=True):

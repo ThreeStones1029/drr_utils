@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-29 09:01:25
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-29 09:03:29
+LastEditTime: 2024-03-29 12:22:48
 '''
 import os
 import sys
@@ -16,9 +16,24 @@ from tqdm import tqdm
 from io_tools.file_management import get_sub_folder_paths, join
 
 
-def rename_cts(root_path):
+def rename_verse2020_cts(root_path):
     """
-    重新命名文件名字,让ct名字与子文件名字一样,方便生成数据
+    VerSe 2020(MICCAI2020 challenge data stracture)
+    the ct sub folder directly put in verse2020 don't need training test valiadtion folder.
+    example:
+        verse2020
+        ├── GL003
+        │   ├── GL003.nii.gz
+        │   ├── GL003-w.png
+        │   ├── GL003_iso-ctd.json
+        │   └── GL003_seg.nii.gz
+        └── sub-verse013
+            ├── GL016.nii.gz
+            ├── GL016-w.png
+            ├── GL016_iso-ctd.json
+            └── GL016_seg.nii.gz
+    Rename the file name so that the ct name is the same as the subfile name to facilitate data generation.
+    param: root_path: the verse 2020 dataset folder.
     """
     sub_folder_paths = get_sub_folder_paths(root_path) 
     for sub_folder_path in tqdm(sub_folder_paths, desc="renaming"):
@@ -39,7 +54,23 @@ def rename_cts(root_path):
 
 def rename_verse2019_cts(root_path):
     """
-    The function will used to rename verse2019 ct mask png json.
+    Verse 2019(subject based data stracture)
+    the ct sub folder directly put in verse2020 don't need training test valiadtion folder.
+    example: 
+        verse2019
+        ├── sub-verse012
+        │   ├── sub-verse012_ct.nii.gz
+        │   ├── sub-verse012_seg-subreg_ctd.json
+        │   ├── sub-verse012_seg-vert_msk.nii.gz
+        │   └── sub-verse012_seg-vert_snp.png
+        └── sub-verse013
+            ├── sub-verse013_ct.nii.gz
+            ├── sub-verse013_seg-subreg_ctd.json
+            ├── sub-verse013_seg-vert_msk.nii.gz
+            └── sub-verse013_seg-vert_snp.png
+
+    Rename the file name so that the ct name is the same as the subfile name to facilitate data generation.
+    param: root_path: the verse 2019 dataset folder.
     """
     sub_folder_paths = get_sub_folder_paths(root_path) 
     for sub_folder_path in tqdm(sub_folder_paths, desc="renaming"):
@@ -59,4 +90,4 @@ def rename_verse2019_cts(root_path):
 
 
 if __name__ == "__main__":
-    rename_verse2019_cts("data/verse2019")
+    rename_verse2019_cts("data/verse2019_test1")

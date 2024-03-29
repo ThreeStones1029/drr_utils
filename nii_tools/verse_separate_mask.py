@@ -47,8 +47,8 @@ class VerseFormatConver:
             file_path = nii_file_paths[0]
             seg_image = sitk.ReadImage(file_path)
             cats_info = load_json_file(json_paths[0])
-            # choosed = self.choose_lumbar_and_lower_thoracic_ct(cats_info)
-            choosed = True # all ct will be choosed
+            choosed = self.choose_lumbar_and_lower_thoracic_ct(cats_info)
+            # choosed = True # all ct will be choosed
             if choosed:
                 for cat_info in cats_info:
                     if "label" in cat_info.keys():
@@ -106,5 +106,5 @@ def ct_dataset_statistics(ct_dataset_path, statistics_information_json_path):
 
 
 if __name__ == "__main__":
-    format_conver = VerseFormatConver("data/verse2019")
+    format_conver = VerseFormatConver("data/verse2019_test1")
     format_conver.run()
