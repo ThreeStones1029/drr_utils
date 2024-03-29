@@ -1,4 +1,4 @@
-# Install script for directory: /home/jjf/Desktop/ITK_3D/Linux_ITK_Gen_Drr
+# Install script for directory: /home/drr_utils/ITK_tools/Linux_ITK_Gen_Drr
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/jjf/Desktop/ITK_3D/Linux_ITK_Gen_Drr/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/drr_utils/ITK_tools/Linux_ITK_Gen_Drr/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

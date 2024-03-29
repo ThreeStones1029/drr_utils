@@ -6,10 +6,68 @@ This repository mainly uses ITK to generate DRR, as well as the corresponding ke
 # 2、Using
 ## 2.1.Preliminary preparation
 ### 2.1.1.ITK tool installation
-[Official zip download address](https://docs.itk.org/en/latest/download.html)
-* windows：You can skip this step without installing ITK.
-* linux：Need to compile and install ITK tool, for specific installation can refer to [itkSoftwareGuide.](https://itk.org/ItkSoftwareGuide.pdf)
-
+[Official zip download address](https://docs.itk.org/en/latest/download.html)\
+windows：You can skip this step without installing ITK.\
+linux：Need to compile and install ITK tool, for specific installation can refer to [itkSoftwareGuide.](https://itk.org/ItkSoftwareGuide.pdf)\
+Here is my install process.
+* (1) install gcc g++\
+if your system don't have gcc and g++,you can run this command install, Otherwise, you can skip it.
+~~~bash
+sudo apt install gcc
+sudo apt-get install build-essential
+~~~
+~~~bash
+gcc --version # run this command to check whether gcc install successfully
+g++ --version # run this command to check whether g++ install successfully
+~~~
+* (2) Download cmake and install.\
+[cmake down url](https://cmake.org/download/)
+~~~bash
+cd cmake-3.28.4
+./bootstrap
+make
+sudo make install
+~~~
+~~~bash
+cmake --version # run this command to check whether cmake install successfully
+~~~
+* (3) install ccmake
+~~~bash
+sudo apt-get install cmake-curses-gui
+~~~
+~~~bash
+ccmake --version # run this command to check whether ccmake install successfully
+~~~
+* (4) Download ITK and install.
+~~~bash
+mkdir ITK
+~~~
+The decompressed installation package is stored in ITK
+~~~bash
+cd ITK
+mkdir build
+~~~
+ls ITK will get
+~~~bash
+├── ITK
+    ├── InsightToolkit-5.3.0
+    ├── build
+~~~
+~~~bash
+cd build
+ccmake ../InsightToolkit-5.3.0
+make
+sudo make install
+~~~
+* (5) build gendrr.cpp
+you need to modify drr_utils/ITK_tools/Linux_ITK_Gen_Drr/CMakeLists.txt, and set(ITK_DIR "/home/software/ITK") the directory to your ITK path.
+Delete the files under the build folder.
+~~~bash
+cd build 
+cmake ..
+make
+~~~
+Then your can start the drr_utils in your ubuntu system!!!
 ## 2.2.Dataset prepare
 ### 2.2.1.Download
 Spine Dataset

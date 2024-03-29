@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *         http://www.apache.org/licenses/LICENSE-2.0.txt
+ *         https://www.apache.org/licenses/LICENSE-2.0.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ namespace itk {
 class MeshIOFactoryRegisterManager
 {
   public:
-  MeshIOFactoryRegisterManager(void (*list[])(void))
+  explicit MeshIOFactoryRegisterManager(void (* const list[])(void))
     {
-    for(;*list; ++list)
+    for(;*list != nullptr; ++list)
       {
       (*list)();
       }
@@ -45,14 +45,11 @@ void  BYUMeshIOFactoryRegister__Private();void  BYUMeshIOFactoryRegister__Privat
 // application translation units. Note that this code will be expanded in the
 // ITK-based applications and not in ITK itself.
 //
-namespace {
 
-  void (*MeshIOFactoryRegisterRegisterList[])(void) = {
-    BYUMeshIOFactoryRegister__Private,BYUMeshIOFactoryRegister__Private,FreeSurferAsciiMeshIOFactoryRegister__Private,FreeSurferAsciiMeshIOFactoryRegister__Private,FreeSurferBinaryMeshIOFactoryRegister__Private,FreeSurferBinaryMeshIOFactoryRegister__Private,GiftiMeshIOFactoryRegister__Private,GiftiMeshIOFactoryRegister__Private,OBJMeshIOFactoryRegister__Private,OBJMeshIOFactoryRegister__Private,OFFMeshIOFactoryRegister__Private,OFFMeshIOFactoryRegister__Private,VTKPolyDataMeshIOFactoryRegister__Private,
-    nullptr};
-  MeshIOFactoryRegisterManager MeshIOFactoryRegisterManagerInstance(MeshIOFactoryRegisterRegisterList);
-
-}
+void (* const MeshIOFactoryRegisterRegisterList[])(void) = {
+  BYUMeshIOFactoryRegister__Private,BYUMeshIOFactoryRegister__Private,FreeSurferAsciiMeshIOFactoryRegister__Private,FreeSurferAsciiMeshIOFactoryRegister__Private,FreeSurferBinaryMeshIOFactoryRegister__Private,FreeSurferBinaryMeshIOFactoryRegister__Private,GiftiMeshIOFactoryRegister__Private,GiftiMeshIOFactoryRegister__Private,OBJMeshIOFactoryRegister__Private,OBJMeshIOFactoryRegister__Private,OFFMeshIOFactoryRegister__Private,OFFMeshIOFactoryRegister__Private,VTKPolyDataMeshIOFactoryRegister__Private,
+  nullptr};
+const MeshIOFactoryRegisterManager MeshIOFactoryRegisterManagerInstance(MeshIOFactoryRegisterRegisterList);
 
 }
 

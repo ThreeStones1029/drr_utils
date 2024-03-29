@@ -5,7 +5,7 @@ project(Linux_ITK_Gen_Drr)
 set(CMAKE_CXX_STANDARD 14)
 
 # 查找 ITK 库的路径
-set(ITK_DIR "/home/jjf/ITK")
+set(ITK_DIR "/home/software/ITK")
 
 # 查找 ITK 库
 find_package(ITK REQUIRED)
