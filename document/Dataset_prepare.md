@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-29 07:33:58
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-03-29 12:33:23
+ * @LastEditTime: 2024-03-29 12:41:29
 -->
 # Spine Dataset Prepare.
 ## 1.Download
@@ -16,16 +16,17 @@ Spine Dataset
 ## 2.Generate CT Dataset(Separate mask dataset format)
 ### 2.1.1.init dataset format.
 ~~~bash
-├── sub-verse012
-│   ├── sub-verse012_ct.nii.gz
-│   ├── sub-verse012_seg-subreg_ctd.json
-│   ├── sub-verse012_seg-vert_msk.nii.gz
-│   └── sub-verse012_seg-vert_snp.png
-└── sub-verse013
-    ├── sub-verse013_ct.nii.gz
-    ├── sub-verse013_seg-subreg_ctd.json
-    ├── sub-verse013_seg-vert_msk.nii.gz
-    └── sub-verse013_seg-vert_snp.png
+verse2019
+    ├── sub-verse012
+    │   ├── sub-verse012_ct.nii.gz
+    │   ├── sub-verse012_seg-subreg_ctd.json
+    │   ├── sub-verse012_seg-vert_msk.nii.gz
+    │   └── sub-verse012_seg-vert_snp.png
+    └── sub-verse013
+        ├── sub-verse013_ct.nii.gz
+        ├── sub-verse013_seg-subreg_ctd.json
+        ├── sub-verse013_seg-vert_msk.nii.gz
+        └── sub-verse013_seg-vert_snp.png
 ~~~
 ### 2.1.2.check Dataset.
 The verse dataset has some subfolders that are empty, some subfolders that have multiple CTS, and some subfolders that only have CT without mask.
