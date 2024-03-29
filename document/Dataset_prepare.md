@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-29 07:33:58
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-03-29 12:41:29
+ * @LastEditTime: 2024-03-29 12:43:19
 -->
 # Spine Dataset Prepare.
 ## 1.Download
@@ -67,4 +67,7 @@ python nii_tools/verse_separate_mask.py
 ~~~bash
 python main_drr_detection_dataset.py
 ~~~
+
+## 3.Generate CT Dataset(verse dataset mask format)
+To be update!!!
 
