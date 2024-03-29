@@ -67,7 +67,7 @@ cd build
 cmake ..
 make
 ~~~
-Then your can start the drr_utils in your ubuntu system!!!
+Then your can start using the drr_utils in your ubuntu system!!!
 ## 2.2.Dataset prepare
 ### 2.2.1.Download
 Spine Dataset
