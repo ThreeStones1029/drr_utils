@@ -29,11 +29,11 @@
 
 
 # verse数据集参数
-ct_root_path: data/verse
-dataset_path: data/verse_drr
-dataset_images_path: data/verse_drr/images
-dataset_masks_path: data/verse_drr/masks
-dataset_json_path: data/verse_drr/detection_data.json
+ct_root_path: data/verse2019
+dataset_path: data/verse2019_drr
+dataset_images_path: data/verse2019_drr/images
+dataset_masks_path: data/verse2019_drr/masks
+dataset_json_path: data/verse2019_drr/detection_data.json
 
 projection_parameter:
   sdr: 500
@@ -41,11 +41,11 @@ projection_parameter:
   specific_height_list: {}
   delx: 1
   threshold: 0
-  AP_num_samples: 40
-  LA_num_samples: 40
-  AP_rot_range_list: [[75, 105], [-180, 180], [165, 195]]
+  AP_num_samples: 10
+  LA_num_samples: 10
+  AP_rot_range_list: [[75, 105], [165, 195], [165, 195]]
   AP_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
-  LA_rot_range_list: [[75, 105], [-180, 180], [75, 105]]
+  LA_rot_range_list: [[75, 105], [165, 195], [75, 105]]
   LA_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
   # AP_rot_range_list: [[90, 90], [180, 180], [180, 180]]
   # AP_trans_range_list: [[0, 0], [0, 0], [0, 0]]
@@ -58,5 +58,5 @@ projection_parameter:
 
 vis_parameter:
   is_vis: True
-  vis_save_path: data/verse_drr/bbox_vis
-  rotation_bbox_vis_save_path: data/verse_drr/rotation_bbox_vis # 旋转框可视化
+  vis_save_path: data/verse2019_drr/bbox_vis
+  rotation_bbox_vis_save_path: data/verse2019_drr/rotation_bbox_vis # 旋转框可视化

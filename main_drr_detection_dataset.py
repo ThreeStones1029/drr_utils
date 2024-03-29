@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:32:05
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-13 19:39:06
+LastEditTime: 2024-03-29 08:42:37
 '''
 from drr_tools.genDRR import genDRR
 from detection_tools.coco_detection_data import COCODetectionData
@@ -257,8 +257,8 @@ def main():
                      projection_parameter = config["projection_parameter"],
                      vis_parameter = config["vis_parameter"])
     
-    # drr_detection_dataset = GenDetectionDataset(config=config)
-    # drr_detection_dataset.gen_multple_cts_drrs_and_masks()
+    drr_detection_dataset = GenDetectionDataset(config=config)
+    drr_detection_dataset.gen_multple_cts_drrs_and_masks()
     
     # Visualize label
     if config.vis_parameter["is_vis"]:
