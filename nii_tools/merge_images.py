@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(current_file_path))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 import SimpleITK as sitk
-from nii_tools.verse_format_conver import VerseCategoriesFormat
+from drr_utils.nii_tools.verse_separate_mask import VerseCategoriesFormat
 
 
 def sitk_merge_masks(image_path, mask_path_list, merged_mask_nii_path):
