@@ -3,9 +3,11 @@ from glob import glob
 import os
 import numpy as np
 import multiprocessing
+from multiprocessing import Process
 from PIL import Image, ImageOps, ImageDraw, ImageFont
 from io_tools.file_management import create_folder, join
 from tqdm import tqdm
+import time
 
 
 class VisCoCo(COCO):
@@ -24,6 +26,13 @@ class VisCoCo(COCO):
         self.categories_id2name, self.categories_name2id = dict(), dict()
         self.cat_name_cat_id()
         self.file_name_img_id()
+        self.draw_text = True
+        self.fontsize = 40
+        if self.draw_text:
+            try:
+                self.font = ImageFont.truetype('arial.ttf', self.fontsize)
+            except IOError:
+                self.font = ImageFont.load_default()
 
 
     def visualize_bboxes_in_images(self):
@@ -31,9 +40,14 @@ class VisCoCo(COCO):
         多张图片可视化水平框
         """
         files_path = self.get_files_path()
-        # multiprocessing.Pool(8) # 创建8个进程，提高代码处理效率
-        with multiprocessing.Pool(8) as pool:
-            list(tqdm(pool.imap(self.visualize_bboxes_in_image, [(file_path) for file_path in sorted(files_path) if os.path.basename(file_path) in self.file_name2img_id.keys()]), total=len(files_path), desc="vis bbox"))
+        vis = []
+        for i in tqdm(range(len(sorted(files_path))), total=len(files_path), desc="vis bbox"):
+            if  os.path.basename(files_path[i]) in self.file_name2img_id.keys():
+                vis.append(Process(target=self.visualize_bboxes_in_image, args=(files_path[i],)))
+                vis[i].start()
+        for i in range(len(sorted(files_path))):
+            if  os.path.basename(files_path[i]) in self.file_name2img_id.keys():
+                vis[i].join()
         
 
     def visualize_bboxes_in_image(self, file_path):
@@ -61,9 +75,6 @@ class VisCoCo(COCO):
         """
         Draw bbox on image 分别可视化bbox和label是为了文字不被挡住
         """
-        font_path = "/usr/share/fonts/truetype/noto/NotoMono-Regular.ttf"
-        font_size = 15
-        font = ImageFont.truetype(font_path, font_size, encoding="utf-8")
         draw = ImageDraw.Draw(image)
         for ann in annotations:
             bbox = ann['bbox']
@@ -91,14 +102,14 @@ class VisCoCo(COCO):
                 catname = ann['category_name']
                 text = "{}".format(catname)
             # tw, th = draw.textsize(text)
-            left, top, right, bottom = draw.textbbox((0, 0), text, font=font)
+            left, top, right, bottom = draw.textbbox((0, 0), text, font=self.font)
             tw, th = right - left, bottom - top
             #label框
             draw.rectangle([(xmin + 1, ymin + 1), (xmin + tw + 1, ymin + th + 1 + 10)], fill='white') 
             # draw.rectangle([(xmin + 1, ymin - th), (xmin + tw + 1, ymin)], fill = color)
             # label文字 
             # (xmin + 1, ymin - th)
-            draw.text((xmin + 1, ymin + 1), text, fill='red', font=font) 
+            draw.text((xmin + 1, ymin + 1), text, fill='red', font=self.font) 
             # draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
         return image
     
@@ -108,9 +119,14 @@ class VisCoCo(COCO):
         多张图片可视化旋转框
         """
         files_path = self.get_files_path()
-        # multiprocessing.Pool(8) # 创建8个进程，提高代码处理效率
-        with multiprocessing.Pool(8) as pool:
-            list(tqdm(pool.imap(self.visualize_rotate_bboxes_in_image, [(file_path) for file_path in sorted(files_path) if os.path.basename(file_path) in self.file_name2img_id.keys()]), total=len(files_path), desc="vis rotation bbox"))
+        vis = []
+        for i in tqdm(range(len(sorted(files_path))), total=len(files_path), desc="vis rotation bbox"):
+            if  os.path.basename(files_path[i]) in self.file_name2img_id.keys():
+                vis.append(Process(target=self.visualize_rotate_bboxes_in_image, args=(files_path[i],)))
+                vis[i].start()
+        for i in range(len(sorted(files_path))):
+            if  os.path.basename(files_path[i]) in self.file_name2img_id.keys():
+                vis[i].join()
 
 
     def visualize_rotate_bboxes_in_image(self, file_path):
@@ -138,9 +154,6 @@ class VisCoCo(COCO):
         """
         Draw bbox on image 分别可视化bbox和label是为了文字不被挡住
         """
-        font_path = "/usr/share/fonts/truetype/noto/NotoMono-Regular.ttf"
-        font_size = 50
-        font = ImageFont.truetype(font_path, font_size, encoding="utf-8")
         draw = ImageDraw.Draw(image)
         for ann in annotations:
             rotate_bbox = ann['segmentation']
@@ -170,14 +183,14 @@ class VisCoCo(COCO):
                 catname = ann['category_name']
                 text = "{}".format(catname)
             # tw, th = draw.textsize(text)
-            left, top, right, bottom = draw.textbbox((0, 0), text, font=font)
+            left, top, right, bottom = draw.textbbox((0, 0), text, font=self.font)
             tw, th = right - left, bottom - top
             #label框
             draw.rectangle([(xmin + 1, ymin + 1), (xmin + tw + 1, ymin + th + 1 + 10)], fill='white') 
             # draw.rectangle([(xmin + 1, ymin - th), (xmin + tw + 1, ymin)], fill = color)
             # label文字 
             # (xmin + 1, ymin - th)
-            draw.text((xmin + 1, ymin + 1), text, fill='red',font=font) 
+            draw.text((xmin + 1, ymin + 1), text, fill='red',font=self.font) 
             # draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
         return image
     
