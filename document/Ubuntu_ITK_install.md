@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-29 12:45:14
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-03-29 12:50:36
+ * @LastEditTime: 2024-03-30 02:06:41
 -->
 # How to install ITK in Ubuntu?
 # 1.install gcc g++
@@ -66,7 +66,7 @@ make
 ~~~
 Then your can start using the drr_utils in your ubuntu system!!!
 
-# 6.your main meet some problems
+# 6.your may meet some problems
 ## 6.1.Could not find OpenSSL.
 ~~~bash
 CMake Error at Utilities/cmcurl/CMakeLists.txt:647 (message):
