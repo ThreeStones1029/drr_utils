@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-30 16:14:49
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-02 19:02:49
+LastEditTime: 2024-03-30 06:08:34
 '''
 import os
 from io_tools.file_management import load_json_file, join, add_whole_in_file_suffix
@@ -87,12 +87,12 @@ class VisMask:
         image = cv2.imread(join(images_path, vis_img_name))
         masks_image = np.zeros_like(image, dtype=np.uint8)
         image_shape = image.shape
+        catname2catid = color_map.get_catname2catid()
         for cat_name, cut_masks_info in Vertebraename2CutMasks.items():
             if len(cut_masks_info) == 1:
                 single_mask = np.zeros(image_shape, dtype=np.uint8)
                 cut_mask = cv2.imread(join(cut_masks_path, cut_masks_info[0]["file_name"]), cv2.IMREAD_GRAYSCALE)
-                cat_id = color_map.catname2catid(cat_name)
-                color = color_map.catid2rgb(cat_id)
+                color = color_map.catid2rgb(catname2catid[cat_name])
                 cut_bbox_coordinate = cut_masks_info[0]["cut_bbox_coordinate"]
                 cut_image_region = single_mask[cut_bbox_coordinate[1]: cut_bbox_coordinate[3], cut_bbox_coordinate[0]: cut_bbox_coordinate[2]]
                 cut_image_region[cut_mask > 0] = color

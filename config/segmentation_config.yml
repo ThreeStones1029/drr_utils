@@ -15,9 +15,9 @@ projection_parameter:
   threshold: 0
   AP_num_samples: 10
   LA_num_samples: 10
-  AP_rot_range_list : [[80, 100], [165, 195], [170, 190]]
+  AP_rot_range_list : [[85, 95], [165, 195], [175, 185]]
   AP_trans_range_list : [[-20, 20], [-20, 20], [-20, 20]]
-  LA_rot_range_list: [[80, 100], [165, 195], [80, 100]]
+  LA_rot_range_list: [[85, 95], [165, 195], [85, 95]]
   LA_trans_range_list: [[-20, 20], [-20, 20], [-20, 20]]
   min_bbox_percentage_of_height: 0.05
   
