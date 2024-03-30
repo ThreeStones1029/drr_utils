@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 16:24:26
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-29 12:44:46
+LastEditTime: 2024-03-30 01:58:46
 '''
 import os
 import glob
@@ -19,8 +19,6 @@ import SimpleITK as sitk
 import numpy as np
 from tqdm import tqdm
 from PIL import Image
-from collections import defaultdict
-from drr_utils.nii_tools.verse_separate_mask import VerseCategoriesFormat
 
 
 class GenPedicles:

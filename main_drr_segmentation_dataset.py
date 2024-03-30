@@ -4,7 +4,7 @@ version: 1.0
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-09 11:29:36
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-02 19:13:01
+LastEditTime: 2024-03-30 01:55:49
 '''
 from fileinput import filename
 import os
@@ -76,19 +76,19 @@ class SegmentationDrrDataset:
                 pedicle_nii.gen_pedicles(join(self.ct_mask_path, sub_folder_name))
 
         # 第二步:预处理nii文件,只保留nii里面最大的物体,来达到预处理的目的
-        # if self.nii_preproess:
-        #     nii_preprocess = NiiTools(self.ct_mask_path)
-        #     nii_preprocess.extract_largest_volume_objects()
+        if self.nii_preproess:
+            nii_preprocess = NiiTools(self.ct_mask_path)
+            nii_preprocess.extract_largest_volume_objects()
 
         # 第三步:生成初始数据集,未裁剪
-        # init_dataset = GenInitSegmentationDrrDataset(ct_root_path=self.ct_mask_path, 
-        #                                              APorLA_orientation=self.APorLA_orientation, 
-        #                                              mask_categories = self.mask_categories,
-        #                                              save_image_file=self.segmentation_data_path,
-        #                                              init_dataset_json_path=self.init_dataset_json_path,
-        #                                              gt_bbox_json_path=self.gt_bbox_json_path,
-        #                                              projection_parameter=self.projection_parameter)
-        # init_dataset.__call__()
+        init_dataset = GenInitSegmentationDrrDataset(ct_root_path=self.ct_mask_path, 
+                                                     APorLA_orientation=self.APorLA_orientation, 
+                                                     mask_categories = self.mask_categories,
+                                                     save_image_file=self.segmentation_data_path,
+                                                     init_dataset_json_path=self.init_dataset_json_path,
+                                                     gt_bbox_json_path=self.gt_bbox_json_path,
+                                                     projection_parameter=self.projection_parameter)
+        init_dataset.__call__()
 
         # 第四步:是否需要加载检测json信息,以检测框为中心方式需要加载,以mask中心不需要加载
         if self.cut_parameter["cut_mode"] == "detection_bbox_center":
