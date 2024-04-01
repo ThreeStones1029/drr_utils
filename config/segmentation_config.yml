@@ -26,8 +26,8 @@ cut_parameter:
   cut_mode: mask_center # mask_center detection_bbox_center
   detection_result_json_path: data/verse2019_segmentation_dataset/all/detection_result/bbox.json
   run_object_detection: False
-  AP_expand_coefficient: 1.5
-  LA_expand_coefficient: 1.3
+  AP_expand_coefficient: 1.1
+  LA_expand_coefficient: 1.1
   Minimum_width_relative_to_the_image: 0.15
   Minimum_height_relative_to_the_image: 0.15
 

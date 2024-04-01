@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:21:50
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-03 15:58:10
+LastEditTime: 2024-03-30 10:55:38
 '''
 from datetime import datetime
 from io_tools.file_management import load_json_file, save_json_file
@@ -88,7 +88,7 @@ class COCODetectionData:
             "id": self.annotation_num,
             "image_id": self.image_num,
             "category_id": category_id,
-            "categoty_name": category_name,
+            "category_name": category_name,
             "area": bbox[2] * bbox[3],
             "bbox": bbox,
             "segmentation": rotation_bbox,

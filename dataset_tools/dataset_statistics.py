@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@qq.com
 Date: 2023-12-31 17:13:53
 LastEditors: ShuaiLei
-LastEditTime: 2023-12-31 17:22:23
+LastEditTime: 2024-03-31 08:21:57
 '''
 import json
 
@@ -75,5 +75,5 @@ class DatasetStatistics:
         return dataset
     
 if __name__ == "__main__":
-    DatasetStatistics(annotation_file="/home/jjf/Desktop/RT-DETR/rtdetr_paddle/datasets/New_ITK_Pre/annotations/detection_data.json",
-                      save_json_file="/home/jjf/Desktop/RT-DETR/rtdetr_paddle/datasets/New_ITK_Pre/annotations/detection_data_statistic.json")
+    DatasetStatistics(annotation_file="data/verse2019_segmentation_dataset/all/fracture_gt_bbox.json",
+                      save_json_file="data/verse2019_segmentation_dataset/all/fracture_gt_bbox_statistic.json")
