@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-31 09:57:42
+LastEditTime: 2024-04-01 01:24:25
 '''
 import sys
 import os
@@ -155,6 +155,9 @@ def split_cut_images2_fracture_and_normal_dataset(fracture_record_json_file,cut_
         if ct_fracture_data[ct_name][vertebrae_label] == "fracture":
             shutil.copy(join(cut_images_folder, file_name), join(fracture_folder, file_name))
     print("split dataset to fracture and normal folder successfully!")
+
+
+
         
      
     
