@@ -1,3 +1,11 @@
+'''
+Description: The file will be used to crop nii and seg mask files.
+version: 
+Author: ThreeStones1029 2320218115@qq.com
+Date: 2024-03-28 07:36:18
+LastEditors: ShuaiLei
+LastEditTime: 2024-04-02 02:38:52
+'''
 import os
 import sys
 current_file_path = os.path.abspath(__file__)
@@ -61,6 +69,20 @@ def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbo
             print("size: ", size)
             print("spacing: ", spacing)
             print("\n")
+
+
+def crop_images_to_fixed_size(images_folder, 
+                              cropped_images_folder, 
+                              fixed_size=[128, 128, 128], 
+                              choosed_veterbrae_label_list=["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"]):
+    """
+    The function will be used to cropped images and sef masks.
+    param: images_folder: The input folder
+    param: cropped_images_folder: The cropped images save folder.
+    param: fixed_size: The cropped image size.
+    """
+
+
 
 
 if __name__ == "__main__":
