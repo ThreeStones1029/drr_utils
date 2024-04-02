@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-28 07:36:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-02 02:38:52
+LastEditTime: 2024-04-02 13:50:58
 '''
 import os
 import sys
@@ -15,7 +15,7 @@ if project_root not in sys.path:
 from io_tools.file_management import get_sub_folder_paths, join, get_subfiles, load_json_file
 import SimpleITK as sitk
 from collections import defaultdict
-from drr_utils.nii_tools.verse_separate_mask import VerseCategoriesFormat
+from nii_tools.verse_separate_mask import VerseCategoriesFormat
 
 
 def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbose=True):
@@ -71,25 +71,22 @@ def crop_nii_according_vertebrae_label(input_folder, vertebrae_label_list, verbo
             print("\n")
 
 
-def crop_images_to_fixed_size(images_folder, 
-                              cropped_images_folder, 
-                              fixed_size=[128, 128, 128], 
-                              choosed_veterbrae_label_list=["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"]):
+def crop_pelvis_in_images(images_folder):
     """
-    The function will be used to cropped images and sef masks.
+    The function will be used to crop pelvis in images and masks.
     param: images_folder: The input folder
-    param: cropped_images_folder: The cropped images save folder.
-    param: fixed_size: The cropped image size.
     """
-
-
+    # compute the seg mask min bounding box
+    sub_folder_paths = get_sub_folder_paths(images_folder)
+    for sub_folder_path in sub_folder_paths:
+        json_files = get_subfiles(sub_folder_path, ".json")
 
 
 if __name__ == "__main__":
-    crop_nii_according_vertebrae_label("data/verse2019",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])
-    # image = sitk.ReadImage("data/verse2019/sub-verse009/sub-verse009bottom.nii.gz")
-    # mask = sitk.ReadImage("data/verse2019/sub-verse009/sub-verse009bottom_seg.nii.gz")
-    # print(image.GetSize())
-    # print(image.GetSpacing())
-    # print(mask.GetSize())
+    # crop_nii_according_vertebrae_label("data/verse2019",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])
+    image = sitk.ReadImage("data/verse2019/sub-verse009bottom/sub-verse009bottom.nii.gz")
+    mask = sitk.ReadImage("data/verse2019/sub-verse009bottom/L1_seg.nii.gz")
+    print(image.GetSize())
+    print(image.GetSpacing())
+    print(mask.GetSize())
     
