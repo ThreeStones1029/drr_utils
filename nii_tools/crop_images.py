@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-28 07:36:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-02 13:50:58
+LastEditTime: 2024-04-03 01:15:14
 '''
 import os
 import sys
@@ -83,10 +83,10 @@ def crop_pelvis_in_images(images_folder):
 
 
 if __name__ == "__main__":
-    # crop_nii_according_vertebrae_label("data/verse2019",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])
-    image = sitk.ReadImage("data/verse2019/sub-verse009bottom/sub-verse009bottom.nii.gz")
-    mask = sitk.ReadImage("data/verse2019/sub-verse009bottom/L1_seg.nii.gz")
-    print(image.GetSize())
-    print(image.GetSpacing())
-    print(mask.GetSize())
+    crop_nii_according_vertebrae_label("data/verse2019",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"])
+    # image = sitk.ReadImage("data/verse2019/sub-verse009bottom/sub-verse009bottom.nii.gz")
+    # mask = sitk.ReadImage("data/verse2019/sub-verse009bottom/L1_seg.nii.gz")
+    # print(image.GetSize())
+    # print(image.GetSpacing())
+    # print(mask.GetSize())
     

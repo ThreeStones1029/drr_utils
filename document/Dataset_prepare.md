@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-29 07:33:58
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-03-29 12:43:19
+ * @LastEditTime: 2024-04-03 01:20:00
 -->
 # Spine Dataset Prepare.
 ## 1.Download
@@ -56,14 +56,24 @@ you can run this command to check that the reorientation is correct.
 python visual_tools/vis_3d_point_and_mask.py
 ~~~
 
-### 2.1.5.choosed vertebrae categories list and Separate mask.
+### 2.1.5.crop cts and masks(selectable)
+In order to add Number of CTs available, we run the follow command to crop the long spine which contain T9-L6.
+~~~bash
+python nii_tools/crop_images.py
+~~~
+also you can run the follow command to check the reorientation of croppped images is correct.
+~~~bash
+python visual_tools/vis_3d_point_and_mask.py
+~~~
+
+### 2.1.6.choosed vertebrae categories list and Separate mask.
 Some CT scans include upper thoracic and cervical vertebrae that need to be discarded. So you need choose the categories you need.\
 Default selection category list is [T9 T10 T11 T12 L1 L2 L3 L4 L5 L6]
 ~~~bash
 python nii_tools/verse_separate_mask.py
 ~~~
 
-### 2.1.6.start generate drr and detection annotation json file.
+### 2.1.7.start generate drr and detection annotation json file.
 ~~~bash
 python main_drr_detection_dataset.py
 ~~~
