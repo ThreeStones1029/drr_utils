@@ -4,4 +4,6 @@ data/verse2019_test1/
 data/verse2019_detection_dataset/
 data/verse2019_segmentation_dataset/
 data/LiYang/
+data/Fracture/
+data/Fracture_dataset/
 README_CN.md

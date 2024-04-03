@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-03 03:03:55
+LastEditTime: 2024-04-03 05:07:03
 '''
 import sys
 import os
@@ -78,8 +78,8 @@ def fracture_xlsx_file_to_json(xlsx_file, choosed_vertebrae_label_list, fracture
         # get ct name
         if row[header.index('verse_ID')] != None:
             ct_name = "sub-verse{:03d}".format(row[header.index('verse_ID')])
-            choosed_categories_fracture_dict = {col.split("_")[0]: row[header.index(col)] for col in choosed_vertebrae_label_fx_g_list}
-            no_choosed_categories_fracture_dict = {col.split("_")[0]: row[header.index(col)] for col in no_choosed_vertebrae_label_fx_g_list}
+            choosed_categories_fracture_dict = {col.split("_")[0]: row[header.index(col)] for col in choosed_vertebrae_label_fx_g_list if row[header.index(col)] != None}
+            no_choosed_categories_fracture_dict = {col.split("_")[0]: row[header.index(col)] for col in no_choosed_vertebrae_label_fx_g_list if row[header.index(col)] != None}
             
             has_T1_T8 = False
             for value in no_choosed_categories_fracture_dict.values():

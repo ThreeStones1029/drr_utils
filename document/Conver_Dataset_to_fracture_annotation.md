@@ -14,16 +14,12 @@ you need provide the json file which record the fracture information? the json f
 ~~~bash
 {
     "sub-verse012.nii.gz": {
-        "T9": null,
         "T10": "normal",
         "T11": "normal",
         "T12": "normal",
         "L1": "fracture",
         "L2": "normal",
-        "L3": "normal",
-        "L4": null,
-        "L5": null,
-        "L6": null
+        "L3": "normal"
     },
     "sub-verse020bottom.nii.gz": {
         "T9": "fracture",
@@ -34,8 +30,7 @@ you need provide the json file which record the fracture information? the json f
         "L2": "normal",
         "L3": "normal",
         "L4": "normal",
-        "L5": "normal",
-        "L6": null
+        "L5": "normal"
     }
 }
 ~~~
