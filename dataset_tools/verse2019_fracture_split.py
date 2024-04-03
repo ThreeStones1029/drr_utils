@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-01 01:24:25
+LastEditTime: 2024-04-03 03:03:55
 '''
 import sys
 import os
@@ -16,6 +16,7 @@ from openpyxl import load_workbook
 from io_tools.file_management import load_json_file, save_json_file, create_folder, join
 from pycocotools.coco import COCO
 import shutil
+
 
 def split_fracture_ct_dataset(xlsx_file, choosed_vertebrae_label_list):
     """
@@ -157,22 +158,19 @@ def split_cut_images2_fracture_and_normal_dataset(fracture_record_json_file,cut_
     print("split dataset to fracture and normal folder successfully!")
 
 
-
-        
-     
-    
 if __name__ == "__main__":
     # split_fracture_ct_dataset("data/verse2019/verse2019_fracture_grading_info.xlsx", 
     #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])
 
-    # fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
-    #                              ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
-    #                              "data/verse2019_segmentation_dataset/all/verse2019_fracture_grading_info.json")
-    # conver_gt_bbox_to_fracture_annotation_file("data/verse2019_segmentation_dataset/all/gt_bbox.json", 
-    #                                            "data/verse2019_segmentation_dataset/all/verse2019_fracture_grading_info.json",
-    #                                            "data/verse2019_segmentation_dataset/all/fracture_gt_bbox.json")
-    # split_cut_images2_fracture_and_normal_dataset("data/verse2019_segmentation_dataset/all/verse2019_fracture_grading_info.json",
-    #                                               "data/verse2019_segmentation_dataset/all/cut_images",
-    #                                               "data/verse2019_segmentation_dataset/all/fracture_images",
-    #                                               "data/verse2019_segmentation_dataset/all/normal_images")
-    print(len(os.listdir("data/verse2019_segmentation_dataset/all/fracture_images")))
+    fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
+                              ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
+                               "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json")
+    conver_gt_bbox_to_fracture_annotation_file("data/verse2019_segmentation_dataset/LA/gt_bbox.json", 
+                                               "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json",
+                                               "data/verse2019_segmentation_dataset/LA/fracture_gt_bbox.json")
+    split_cut_images2_fracture_and_normal_dataset("data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json",
+                                                  "data/verse2019_segmentation_dataset/LA/cut_images",
+                                                  "data/verse2019_segmentation_dataset/LA/fracture_images",
+                                                  "data/verse2019_segmentation_dataset/LA/normal_images")
+    print("normal images number = ", len(os.listdir("data/verse2019_segmentation_dataset/LA/normal_images")))
+    print("fracture images number = ", len(os.listdir("data/verse2019_segmentation_dataset/LA/fracture_images")))
