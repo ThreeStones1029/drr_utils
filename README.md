@@ -6,7 +6,6 @@
  * @LastEditors: ShuaiLei
  * @LastEditTime: 2024-04-04 07:21:05
 -->
-# Deep Learning Spine DRR Toolkit
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
     <a href="https://github.com/ThreeStones1029/drr_utils/blob/main/LICENSE">
