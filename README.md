@@ -73,8 +73,8 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 
 ### example
 <div style="display: flex;">
-    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="500"; padding: 5px;">
-    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="500"; padding: 5px;">
+    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="300"; padding: 5px;">
+    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="300"; padding: 5px;">
 </div>
 
 ## Segmantation(verse mask format)
