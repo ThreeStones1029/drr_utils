@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-04 06:51:49
+ * @LastEditTime: 2024-04-04 07:14:38
 -->
 # Deep Learning Spine DRR Toolkit
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
@@ -16,7 +16,7 @@
 <details>
 <summary>Fig</summary>
 
-![drr_utils_examples](https://github.com/xxx)
+![drr_utils_examples](document/drr_utils.png)
 # 1、Introduction
 This repository mainly uses ITK to generate DRR, as well as the corresponding keypoints, detection boxes, and segmentation mask annotations. The generated dataset can be used for pre-trained model training to improve the robustness of deep learning.
 
