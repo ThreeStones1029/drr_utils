@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-04 07:14:38
+ * @LastEditTime: 2024-04-04 07:16:07
 -->
 # Deep Learning Spine DRR Toolkit
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
@@ -13,8 +13,7 @@
         <img alt="license" src="https://img.shields.io/badge/LICENSE-GPL%203.0-blue">
     </a>
 </p>
-<details>
-<summary>Fig</summary>
+
 
 ![drr_utils_examples](document/drr_utils.png)
 # 1、Introduction
