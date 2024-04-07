@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@qq.com
 Date: 2024-01-23 20:11:03
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-26 08:51:26
+LastEditTime: 2024-04-07 07:55:10
 '''
 import os
 import sys
@@ -27,15 +27,8 @@ def random_choose_images(images_folder, target_folder, random_numbers):
         if int(number) in random_numbers:
             shutil.copy(join(images_folder, file_name), join(target_folder, file_name))
 
-
-def random_horizontal_flip():
-    """
-    随机水平翻转侧位
-    """
     
-
 if __name__ == "__main__":
-    # random_choose_images("/home/jjf/ITK/drr_utils/data/segmentation_dataset/LA512/masks", 
-    #                      "/home/jjf/ITK/drr_utils/data/segmentation_dataset/all512/masks",
-    #                      random_numbers=[1, 3, 5, 8, 10, 13, 15, 20, 17, 19])
-    random_horizontal_flip()
+    random_choose_images("data/segmentation_dataset/LA512/masks", 
+                         "data/segmentation_dataset/all512/masks",
+                         random_numbers=[1, 3, 5, 8, 10, 13, 15, 20, 17, 19])
