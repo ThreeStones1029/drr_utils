@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-03 05:07:03
+LastEditTime: 2024-04-07 12:46:30
 '''
 import sys
 import os
@@ -16,6 +16,7 @@ from openpyxl import load_workbook
 from io_tools.file_management import load_json_file, save_json_file, create_folder, join
 from pycocotools.coco import COCO
 import shutil
+import re
 
 
 def split_fracture_ct_dataset(xlsx_file, choosed_vertebrae_label_list):
@@ -131,6 +132,7 @@ def conver_gt_bbox_to_fracture_annotation_file(annotation_file, fracture_record_
     for image in gt.dataset["images"]:
         single_fracture_data = fracture_data[image["ct_name"]]
         for ann in gt.imgToAnns[image["id"]]:
+            print(image["ct_name"])
             ann["category_name"] = single_fracture_data[ann["category_name"]]
             ann["category_id"] = 1 if ann["category_name"] == "normal" else 2
     gt.dataset["categories"] = categories
@@ -149,28 +151,31 @@ def split_cut_images2_fracture_and_normal_dataset(fracture_record_json_file,cut_
     create_folder(normal_folder)
     ct_fracture_data = load_json_file(fracture_record_json_file)
     for file_name in os.listdir(cut_images_folder):
-        ct_name = file_name.split("_")[0] + ".nii.gz"
-        vertebrae_label = file_name.split("_")[2]
-        if ct_fracture_data[ct_name][vertebrae_label] == "normal":
-            shutil.copy(join(cut_images_folder, file_name), join(normal_folder, file_name))
-        if ct_fracture_data[ct_name][vertebrae_label] == "fracture":
-            shutil.copy(join(cut_images_folder, file_name), join(fracture_folder, file_name))
+        # example file_name = chen_fu_di_LA_L1_1.png
+        pattern = r'^(.*?)_(?:LA|AP)_C\d+\.png$'
+        ct_name = re.match(pattern, file_name).group(1) + ".nii.gz"
+        vertebrae_label = file_name.split("_")[-2]
+        print(ct_name, vertebrae_label)
+        # if ct_fracture_data[ct_name][vertebrae_label] == "normal":
+        #     shutil.copy(join(cut_images_folder, file_name), join(normal_folder, file_name))
+        # if ct_fracture_data[ct_name][vertebrae_label] == "fracture":
+        #     shutil.copy(join(cut_images_folder, file_name), join(fracture_folder, file_name))
     print("split dataset to fracture and normal folder successfully!")
 
 
 if __name__ == "__main__":
     # split_fracture_ct_dataset("data/verse2019/verse2019_fracture_grading_info.xlsx", 
-    #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])
+    #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])huoqu
 
-    fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
-                              ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
-                               "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json")
-    conver_gt_bbox_to_fracture_annotation_file("data/verse2019_segmentation_dataset/LA/gt_bbox.json", 
-                                               "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json",
-                                               "data/verse2019_segmentation_dataset/LA/fracture_gt_bbox.json")
-    split_cut_images2_fracture_and_normal_dataset("data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json",
-                                                  "data/verse2019_segmentation_dataset/LA/cut_images",
-                                                  "data/verse2019_segmentation_dataset/LA/fracture_images",
-                                                  "data/verse2019_segmentation_dataset/LA/normal_images")
-    print("normal images number = ", len(os.listdir("data/verse2019_segmentation_dataset/LA/normal_images")))
-    print("fracture images number = ", len(os.listdir("data/verse2019_segmentation_dataset/LA/fracture_images")))
+    # fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
+    #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
+    #                            "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json")
+    conver_gt_bbox_to_fracture_annotation_file("data/Fracture_dataset/LA/gt_bbox.json", 
+                                               "data/Fracture_dataset/LA/fracture_grading_info.json",
+                                               "data/Fracture_dataset/LA/fracture_gt_bbox.json")
+    split_cut_images2_fracture_and_normal_dataset("data/Fracture_dataset/LA/fracture_grading_info.json",
+                                                  "data/Fracture_dataset/LA/cut_images",
+                                                  "data/Fracture_dataset/LA/fracture_images",
+                                                  "data/Fracture_dataset/LA/normal_images")
+    print("normal images number = ", len(os.listdir("data/Fracture_dataset/LA/normal_images")))
+    print("fracture images number = ", len(os.listdir("data/Fracture_dataset/LA/fracture_images")))
