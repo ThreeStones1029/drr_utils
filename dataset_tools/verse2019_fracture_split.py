@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-07 12:46:30
+LastEditTime: 2024-04-08 02:41:22
 '''
 import sys
 import os
@@ -132,7 +132,6 @@ def conver_gt_bbox_to_fracture_annotation_file(annotation_file, fracture_record_
     for image in gt.dataset["images"]:
         single_fracture_data = fracture_data[image["ct_name"]]
         for ann in gt.imgToAnns[image["id"]]:
-            print(image["ct_name"])
             ann["category_name"] = single_fracture_data[ann["category_name"]]
             ann["category_id"] = 1 if ann["category_name"] == "normal" else 2
     gt.dataset["categories"] = categories
@@ -150,16 +149,21 @@ def split_cut_images2_fracture_and_normal_dataset(fracture_record_json_file,cut_
     create_folder(fracture_folder)
     create_folder(normal_folder)
     ct_fracture_data = load_json_file(fracture_record_json_file)
+    pattern = r'^(.*?)_(?:LA|AP)_(.*?)_\d+\.png$'
+    # ^: string start
+    # (.*?): anying string still next part
+    # (?:LA|AP): AP or LA
+    # \d+: single number or multi numbers
+    # \.png$: string endwith .png
     for file_name in os.listdir(cut_images_folder):
         # example file_name = chen_fu_di_LA_L1_1.png
-        pattern = r'^(.*?)_(?:LA|AP)_C\d+\.png$'
-        ct_name = re.match(pattern, file_name).group(1) + ".nii.gz"
-        vertebrae_label = file_name.split("_")[-2]
-        print(ct_name, vertebrae_label)
-        # if ct_fracture_data[ct_name][vertebrae_label] == "normal":
-        #     shutil.copy(join(cut_images_folder, file_name), join(normal_folder, file_name))
-        # if ct_fracture_data[ct_name][vertebrae_label] == "fracture":
-        #     shutil.copy(join(cut_images_folder, file_name), join(fracture_folder, file_name))
+        if re.match(pattern, file_name):
+            ct_name = re.match(pattern, file_name)[1] + ".nii.gz"
+            vertebrae_label = file_name.split("_")[-2]
+            if ct_fracture_data[ct_name][vertebrae_label] == "normal":
+                shutil.copy(join(cut_images_folder, file_name), join(normal_folder, file_name))
+            if ct_fracture_data[ct_name][vertebrae_label] == "fracture":
+                shutil.copy(join(cut_images_folder, file_name), join(fracture_folder, file_name))
     print("split dataset to fracture and normal folder successfully!")
 
 
