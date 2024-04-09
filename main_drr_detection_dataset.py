@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:32:05
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-30 00:51:32
+LastEditTime: 2024-04-09 06:20:26
 '''
 from drr_tools.genDRR import genDRR
 from detection_tools.coco_detection_data import COCODetectionData
@@ -17,6 +17,7 @@ from time_tools.consume_time import Timer
 import argparse
 import time
 import os
+import shutil
 from glob import glob
 
 
@@ -100,7 +101,8 @@ class GenDetectionDataset:
             if os.path.exists(self.dataset_json_path):
                 self.detection_dataset.load_json(self.dataset_json_path)
             #------------------------------------------------------------------------------------------------------------------- 
-            # 注意如果需要完全重新生,例如修改生成数量, 需要把已经存在的json文件删除,否则会自动读取已经存在的json文件,只对不在json文件中ct生成数据 #
+            # Note if you want regenerate completely,just add "-r all", Otherwise, it will automatically read the existing json 
+            # file and only generate data for ct that is not in the json file #
             #-------------------------------------------------------------------------------------------------------------------
             if (ct_name + ".nii.gz" not in self.detection_dataset.exist_ct_nii_names["AP"]) and (ct_name + ".nii.gz" not in self.detection_dataset.exist_ct_nii_names["LA"]):
                 time_tool = Timer()
@@ -240,12 +242,14 @@ class GenDetectionDataset:
 def parse_args():
     parser = argparse.ArgumentParser(description="these py file will be used to gen drrs and masks")
     parser.add_argument("-c", "--config", default="config/detection_config.yml", help="Path to the YAML configuration file")
+    parser.add_argument("-r", "--regenerate_specified_cts", default=None, help="The ct name list will be regenerated drrs, if all , then regenerate all from zero")
     args = parser.parse_args()
     return args
 
 
 def main():
     args = parse_args()
+    print(args)
     config = load_config_file(args.config)
 
     # Accessing values from the YAML file
@@ -257,8 +261,12 @@ def main():
                      projection_parameter = config["projection_parameter"],
                      vis_parameter = config["vis_parameter"])
     
-    # drr_detection_dataset = GenDetectionDataset(config=config)
-    # drr_detection_dataset.gen_multple_cts_drrs_and_masks()
+    if args.regenerate_specified_cts == "all":
+        print("[***Note]",config["dataset_path"], "is deleted.", "Then Generate from zero.")
+        shutil.rmtree(config["dataset_path"])
+    
+    drr_detection_dataset = GenDetectionDataset(config=config)
+    drr_detection_dataset.gen_multple_cts_drrs_and_masks()
     
     # Visualize label
     if config.vis_parameter["is_vis"]:

@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:46:18
 LastEditors: ShuaiLei
-LastEditTime: 2023-12-31 13:57:57
+LastEditTime: 2024-04-09 06:19:22
 '''
 from drr_tools.genDRR import genDRR
 from drr_tools.drr_image_postprocess import gen_2D_mask, compute_min_bbox_coverage_mask, compute_min_rotation_bbox_coverage_mask
@@ -98,7 +98,8 @@ class GenInitSegmentationDrrDataset:
             # get ct name
             ct_name = linux_windows_split_name(single_ct_path)
             #------------------------------------------------------------------------------------------------------------------- 
-            # 注意如果需要完全重新生,例如修改生成数量, 需要把已经存在的json文件删除,否则会自动读取已经存在的json文件,只对不在json文件中ct生成数据 #
+            # Note if you want regenerate completely,just add "-r all", Otherwise, it will automatically read the existing json 
+            # file and only generate data for ct that is not in the json file #
             #-------------------------------------------------------------------------------------------------------------------
             if ct_name + ".nii.gz" not in self.init_segmentation_dataset.exist_ct_nii_names["AP"]:
                 time_tool = Timer()

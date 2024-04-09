@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-09 03:15:38
+ * @LastEditTime: 2024-04-09 06:16:05
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -44,8 +44,14 @@ The generated json file will be automatically saved after each CT generation. Du
 ~~~bash
 python main_drr_detection_dataset.py -c config/detection_config.yml
 ~~~
-**Note:If you want to regenerate a larger dataset after generating it, you need to delete detection_data.json under data/verse2020_detection_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, starting from the CT that has not been projected.**
+**Note:the CT that has been projected in the json file will be automatically detected, starting from the CT that has not been projected.**
 
+### Regenerate the specified cts.
+Sometimes, we main generate single ct wrong, but we don't want to regenerate all cts' drrs. So if you need regenerate the specified cts, just add the ct name in regenerate ct name list. Then run the follow Similar command.Or if you need regenerate all the drrs, just input -r all.
+~~~bash
+python main_drr_detection_dataset.py -c config/detection_config.yml -r ["du_xiang.nii.gz"] 
+python main_drr_detection_dataset.py -c config/detection_config.yml -r all # if -r==all then will regenerate all cts drrs.
+~~~
 
 ### Example
 <div style="display: flex;">
@@ -70,10 +76,10 @@ The generated json file will be automatically saved after each CT generation. Du
 ~~~bash
 python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 ~~~
-**Note: If you want to regenerate a larger dataset after generating it, you need to delete all json files under data/verse2020_segmentation_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, and the CT that has not been projected will be started from the CT that has not been projected.**
+**Note:The CT that has been projected in the json file will be automatically detected, and the CT that has not been projected will be started from the CT that has not been projected.**
 
 ### Regenerate the specified cts.
-Sometimes, we main generate single ct wrong, but we don't want to regenerate all cts' drrs. So if you need regenerate the specified cts, just add the ct name in regenerate ct name list. Then run the follow Similar command.
+Sometimes, we main generate single ct wrong, but we don't want to regenerate all cts' drrs. So if you need regenerate the specified cts, just add the ct name in regenerate ct name list. Then run the follow Similar command.Or if you need regenerate all the drrs, just input -r all.
 ~~~bash
 python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r ["du_xiang.nii.gz"] 
 python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r all # if -r==all then will regenerate all cts drrs.

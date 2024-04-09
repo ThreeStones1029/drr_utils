@@ -29,11 +29,11 @@
 
 
 # verse数据集参数
-ct_root_path: data/verse2019
-dataset_path: data/verse2019_drr
-dataset_images_path: data/verse2019_drr/images
-dataset_masks_path: data/verse2019_drr/masks
-dataset_json_path: data/verse2019_drr/detection_data.json
+ct_root_path: data/test
+dataset_path: data/test_drr
+dataset_images_path: data/test_drr/images
+dataset_masks_path: data/test_drr/masks
+dataset_json_path: data/test_drr/detection_data.json
 
 projection_parameter:
   sdr: 500
@@ -58,5 +58,5 @@ projection_parameter:
 
 vis_parameter:
   is_vis: True
-  vis_save_path: data/verse2019_drr/bbox_vis
-  rotation_bbox_vis_save_path: data/verse2019_drr/rotation_bbox_vis # 旋转框可视化
+  vis_save_path: data/test_drr/bbox_vis
+  rotation_bbox_vis_save_path: data/test_drr/rotation_bbox_vis # 旋转框可视化
