@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:32:05
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 06:20:26
+LastEditTime: 2024-04-09 08:29:27
 '''
 from drr_tools.genDRR import genDRR
 from detection_tools.coco_detection_data import COCODetectionData
@@ -69,7 +69,9 @@ class GenDetectionDataset:
         self.min_bbox_percentage_of_height = config.projection_parameter["min_bbox_percentage_of_height"]
         self.AP_rotations, self.AP_translations = self.gen_random_pose_parameters(self.AP_rot_range_list, self.AP_trans_range_list, self.AP_num_samples)
         self.LA_rotations, self.LA_translations = self.gen_random_pose_parameters(self.LA_rot_range_list, self.LA_trans_range_list, self.LA_num_samples)
-        self.detection_dataset = COCODetectionData()
+        self.rotations_and_translations = {"AP_rotations": self.AP_rotations, "AP_translations": self.AP_translations,
+                                           "LA_rotations": self.LA_rotations, "LA_translations": self.LA_translations}
+        self.detection_dataset = COCODetectionData(config.projection_parameter, self.rotations_and_translations)
         self.delete_mask = True if self.AP_num_samples + self.LA_num_samples >= 2000 else False
         # create save folder
         create_folder(self.dataset_path)
@@ -100,6 +102,10 @@ class GenDetectionDataset:
             # 读取已经生成的文件
             if os.path.exists(self.dataset_json_path):
                 self.detection_dataset.load_json(self.dataset_json_path)
+                self.AP_rotations = self.detection_dataset.info["rotations_and_translations"]["AP_rotations"]
+                self.AP_translations = self.detection_dataset.info["rotations_and_translations"]["AP_translations"]
+                self.LA_rotations = self.detection_dataset.info["rotations_and_translations"]["LA_rotations"]
+                self.LA_translations = self.detection_dataset.info["rotations_and_translations"]["LA_translations"]
             #------------------------------------------------------------------------------------------------------------------- 
             # Note if you want regenerate completely,just add "-r all", Otherwise, it will automatically read the existing json 
             # file and only generate data for ct that is not in the json file #

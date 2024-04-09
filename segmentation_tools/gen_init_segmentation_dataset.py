@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:46:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 08:03:06
+LastEditTime: 2024-04-09 08:26:29
 '''
 from drr_tools.genDRR import genDRR
 from drr_tools.drr_image_postprocess import gen_2D_mask, compute_min_bbox_coverage_mask, compute_min_rotation_bbox_coverage_mask
@@ -63,7 +63,7 @@ class GenInitSegmentationDrrDataset:
         self.save_image_file = save_image_file
         self.init_dataset_json_path = init_dataset_json_path
         self.init_segmentation_dataset = InitSegmentationDatasetJson(projection_parameter, self.rotations_and_translations, init_dataset_json_path)
-        self.detection_bbox_annotation = COCODetectionData()
+        self.detection_bbox_annotation = COCODetectionData(self.projection_parameter, self.rotations_and_translations)
         self.min_bbox_percentage_of_height = projection_parameter["min_bbox_percentage_of_height"]
         self.gt_bbox_json_path = gt_bbox_json_path
 

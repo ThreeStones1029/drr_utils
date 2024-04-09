@@ -4,22 +4,22 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:21:50
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-30 10:55:38
+LastEditTime: 2024-04-09 08:21:55
 '''
 from datetime import datetime
 from io_tools.file_management import load_json_file, save_json_file
 
 
 class COCODetectionData:
-    def __init__(self):
-        self.info = {
-            "description": "Spine Detection DataSet",
-            "url": "https://github.com/ThreeStones1029",
-            "version": "1.0",
-            "year": datetime.now().year,
-            "contributor": "ShuaiLei",
-            "Date": datetime.today().strftime('%Y-%m-%d')
-        }
+    def __init__(self, projection_parameter, rotations_and_translations):
+        self.info = {"dataset_info": {"description": "Spine Detection DataSet",
+                                      "url": "https://github.com/ThreeStones1029",
+                                      "version": "1.0",
+                                      "year": datetime.now().year,
+                                      "contributor": "ShuaiLei",
+                                      "Date": datetime.today().strftime('%Y-%m-%d')},
+                    "projection_parameter": projection_parameter,
+                    "rotations_and_translations": rotations_and_translations}
         self.annotation_num = 0
         self.image_num = 0
         self.images = []
