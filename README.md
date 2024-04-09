@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-09 02:17:45
+ * @LastEditTime: 2024-04-09 03:15:38
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -75,7 +75,8 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 ### Regenerate the specified cts.
 Sometimes, we main generate single ct wrong, but we don't want to regenerate all cts' drrs. So if you need regenerate the specified cts, just add the ct name in regenerate ct name list. Then run the follow Similar command.
 ~~~bash
-python main_drr_segmentation_dataset.py -c config/segmentation_config.yml --regenerate_specified_cts ["du_xiang.nii.gz"] 
+python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r ["du_xiang.nii.gz"] 
+python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r all # if -r==all then will regenerate all cts drrs.
 ~~~
 
 ### Example

@@ -4,7 +4,7 @@ version: 1.0
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-09 11:29:36
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 02:31:51
+LastEditTime: 2024-04-09 03:13:14
 '''
 import os
 import time
@@ -130,14 +130,14 @@ class SegmentationDrrDataset:
 def parse_args():
     parser = argparse.ArgumentParser(description="these py file will be used to gen drrs and masks")
     parser.add_argument("-c", "--config", default="config/segmentation_config.yml", help="Path to the YAML configuration file")
-    parser.add_argument("-r", "--regenerate_specified_cts", default=["du_xiang.nii.gz"], help="The ct name list will be regenerated drrs")
-    parser.add_argument("-continue", "--continue_generating", default=True, help="if ture, Unexpected interruptions continue to be generated, otherwise, it will regenerate from none")
+    parser.add_argument("-r", "--regenerate_specified_cts", default=["du_xiang.nii.gz"], help="The ct name list will be regenerated drrs, if all , then regenerate all from zero")
     args = parser.parse_args()
     return args
 
 
 def main():
     args = parse_args()
+    print(args)
     config = load_config_file(args.config)
 
     # Accessing values from the YAML file
@@ -150,11 +150,11 @@ def main():
                      has_pedicle = config["has_pedicle"],
                      projection_parameter = config["projection_parameter"],
                      cut_parameter = config["cut_parameter"],
-                     vis_parameter = config["vis_parameter"])
-    if args.continue_generating == False:
+                     vis_parameter = config["vis_parameter"],
+                     )
+    if args.regenerate_specified_cts == "all":
+        print("[***Note]",join(config["data_root_path"] , config["dataset_save_root_folder_name"], config["APorLA_orientation"]), "is deleted.", "Then Generate from zero.")
         shutil.rmtree(join(config["data_root_path"] , config["dataset_save_root_folder_name"], config["APorLA_orientation"]))
-    for ct_name in args.regenerate_specified_cts:
-        print(ct_name)
     dataset = SegmentationDrrDataset(config)
     dataset.create_dataset()
 
