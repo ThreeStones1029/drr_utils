@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-07 21:28:15
 LastEditors: ShuaiLei
-LastEditTime: 2023-12-31 13:59:46
+LastEditTime: 2024-04-09 07:35:41
 '''
 import os
 import sys
@@ -17,7 +17,7 @@ import numpy as np
 
 
 class InitSegmentationDatasetJson:
-    def __init__(self, projection_parameter, init_dataset_json_path):
+    def __init__(self, projection_parameter, rotations_and_translations, init_dataset_json_path):
         '''
         description: 
         self.info 初始数据集基本信息
@@ -30,6 +30,7 @@ class InitSegmentationDatasetJson:
         self.catname2catid mask类别名字到类别id映射
         self.catid2catname mask类别id到类别名字映射
         self.projection_parameter 投影参数
+        self.rotations_and_translations 生成的随机角度与随机移动列表
         self.init_dataset_json_path 生成的json文件保存路径
         return {*}
         '''
@@ -45,6 +46,7 @@ class InitSegmentationDatasetJson:
         self.catname2catid = dict()
         self.catid2catname = dict()
         self.projection_parameter = projection_parameter
+        self.rotations_and_translations = rotations_and_translations
         self.init_dataset_json_path = init_dataset_json_path
         self.InitJson()
 
@@ -70,12 +72,12 @@ class InitSegmentationDatasetJson:
 
 
     def add_info(self):
-
         self.info["dataset_info"] = {"description": "drrs and masks dataset",
-                                             "version": "1.0",
-                                             "Author": "ThreeStones1029",
-                                             "Date": datetime.today().strftime('%Y-%m-%d')}
+                                     "version": "1.0",
+                                     "Author": "ThreeStones1029",
+                                     "Date": datetime.today().strftime('%Y-%m-%d')}
         self.info["projection_parameter"] = self.projection_parameter
+        self.info["rotations_and_translations"] = self.rotations_and_translations
         
     def add_image(self, image_name,ct_name, AP_or_LA, width, height, rotation, translation):
         image_info = {}
@@ -166,6 +168,7 @@ class InitSegmentationDatasetJson:
                 self.exist_ct_nii_names["AP"].append(ct_info["ct_name"])
             if ct_info["AP_or_LA"] == "LA" and ct_info["ct_name"] not in self.exist_ct_nii_names["LA"]:
                 self.exist_ct_nii_names["LA"].append(ct_info["ct_name"])
+        
 
 
 class InitSegmentationDatasetJsonTools:

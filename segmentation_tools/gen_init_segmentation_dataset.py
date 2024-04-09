@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:46:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 06:19:22
+LastEditTime: 2024-04-09 08:03:06
 '''
 from drr_tools.genDRR import genDRR
 from drr_tools.drr_image_postprocess import gen_2D_mask, compute_min_bbox_coverage_mask, compute_min_rotation_bbox_coverage_mask
@@ -55,12 +55,14 @@ class GenInitSegmentationDrrDataset:
         self.LA_trans_range_list = projection_parameter["LA_trans_range_list"]
         self.AP_rotations, self.AP_translations = self.gen_random_pose_parameters(self.AP_rot_range_list, self.AP_trans_range_list, self.AP_num_samples)
         self.LA_rotations, self.LA_translations = self.gen_random_pose_parameters(self.LA_rot_range_list, self.LA_trans_range_list, self.LA_num_samples)
+        self.rotations_and_translations = {"AP_rotations": self.AP_rotations, "AP_translations": self.AP_translations,
+                                           "LA_rotations": self.LA_rotations, "LA_translations": self.LA_translations}
         self.ct_root_path = ct_root_path
         self.APorLA_orientation = APorLA_orientation
         self.mask_categories = mask_categories
         self.save_image_file = save_image_file
         self.init_dataset_json_path = init_dataset_json_path
-        self.init_segmentation_dataset = InitSegmentationDatasetJson(projection_parameter, init_dataset_json_path)
+        self.init_segmentation_dataset = InitSegmentationDatasetJson(projection_parameter, self.rotations_and_translations, init_dataset_json_path)
         self.detection_bbox_annotation = COCODetectionData()
         self.min_bbox_percentage_of_height = projection_parameter["min_bbox_percentage_of_height"]
         self.gt_bbox_json_path = gt_bbox_json_path
@@ -77,6 +79,11 @@ class GenInitSegmentationDrrDataset:
         # 判断是否已经有了json文件,若有则读取已经生成的文件
         if os.path.exists(self.init_dataset_json_path):
             self.init_segmentation_dataset.load_json(self.init_dataset_json_path)
+            # remain the exist rotations_and_translations
+            self.AP_rotations = self.init_segmentation_dataset.info["rotations_and_translations"]["AP_rotations"]
+            self.AP_translations = self.init_segmentation_dataset.info["rotations_and_translations"]["AP_translations"]
+            self.LA_rotations = self.init_segmentation_dataset.info["rotations_and_translations"]["LA_rotations"]
+            self.LA_translations = self.init_segmentation_dataset.info["rotations_and_translations"]["LA_translations"]
         # 判断检测标注是否有了json文件，若有则读取已经生成的文件
         if os.path.exists(self.gt_bbox_json_path):
             self.detection_bbox_annotation.load_json(self.gt_bbox_json_path)
@@ -123,7 +130,8 @@ class GenInitSegmentationDrrDataset:
             # get ct name
             ct_name = linux_windows_split_name(single_ct_path)
             #------------------------------------------------------------------------------------------------------------------- 
-            # 注意如果需要完全重新生,例如修改生成数量, 需要把已经存在的json文件删除,否则会自动读取已经存在的json文件,只对不在json文件中ct生成数据 #
+            # Note if you want regenerate completely,just add "-r all", Otherwise, it will automatically read the existing json 
+            # file and only generate data for ct that is not in the json file #
             #-------------------------------------------------------------------------------------------------------------------
             if ct_name + ".nii.gz" not in self.init_segmentation_dataset.exist_ct_nii_names["LA"]:
                 time_tool = Timer()
