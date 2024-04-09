@@ -1,6 +1,6 @@
 data_root_path: data
-ct_mask_path: data/verse2019
-dataset_save_root_folder_name: Fracture_dataset
+ct_mask_path: data/test
+dataset_save_root_folder_name: test_drr
 APorLA_orientation: LA # AP LA all
 mask_categories: ["whole"] # whole body pedicle other
 nii_preproess: False
@@ -24,7 +24,7 @@ projection_parameter:
 # Mode of clipping
 cut_parameter:
   cut_mode: mask_center # mask_center detection_bbox_center
-  detection_result_json_path: data/Fracture_dataset/LA/detection_result/bbox.json
+  detection_result_json_path: data/test_drr/LA/detection_result/bbox.json
   run_object_detection: False
   AP_expand_coefficient: 1.1
   LA_expand_coefficient: 1.1

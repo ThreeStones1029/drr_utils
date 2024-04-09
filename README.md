@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-04 07:49:15
+ * @LastEditTime: 2024-04-09 02:17:45
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -46,7 +46,8 @@ python main_drr_detection_dataset.py -c config/detection_config.yml
 ~~~
 **Note:If you want to regenerate a larger dataset after generating it, you need to delete detection_data.json under data/verse2020_detection_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, starting from the CT that has not been projected.**
 
-### example
+
+### Example
 <div style="display: flex;">
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
@@ -71,7 +72,13 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml
 ~~~
 **Note: If you want to regenerate a larger dataset after generating it, you need to delete all json files under data/verse2020_segmentation_dataset manually. Otherwise, the CT that has been projected in the json file will be automatically detected, and the CT that has not been projected will be started from the CT that has not been projected.**
 
-### example
+### Regenerate the specified cts.
+Sometimes, we main generate single ct wrong, but we don't want to regenerate all cts' drrs. So if you need regenerate the specified cts, just add the ct name in regenerate ct name list. Then run the follow Similar command.
+~~~bash
+python main_drr_segmentation_dataset.py -c config/segmentation_config.yml --regenerate_specified_cts ["du_xiang.nii.gz"] 
+~~~
+
+### Example
 <div style="display: flex;">
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">

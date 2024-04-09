@@ -4,12 +4,12 @@ version: 1.0
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-09 11:29:36
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-30 01:55:49
+LastEditTime: 2024-04-09 02:31:51
 '''
-from fileinput import filename
 import os
 import time
 import argparse
+import shutil
 from nii_tools.nii_process import GenPedicles, NiiTools
 from segmentation_tools.gen_init_segmentation_dataset import GenInitSegmentationDrrDataset
 from segmentation_tools.gen_cut_segmentation_dataset import GenCutSegmentationDrrDataset
@@ -109,9 +109,7 @@ class SegmentationDrrDataset:
                                                    cut_masks_save_path = self.cut_dataset_masks_path, 
                                                    cut_parameter = self.cut_parameter)
         cut_dataset.cut_drrs_and_masks()
-
-
-        # # 第六步: 是否需要生成可视化文件
+        # Step 6: Do you need to generate visualize files.
         if self.vis_parameter["is_vis"]:
             if os.path.exists(self.gt_bbox_json_path):
                 visdetection = VisCoCo(self.gt_bbox_json_path , self.init_dataset_images_path, self.gt_bbox_vis_path, self.gt_rotation_bbox_vis_path)
@@ -123,17 +121,17 @@ class SegmentationDrrDataset:
             vismask.visual_cut_masks_in_cut_images(cut_images_path = self.cut_dataset_images_path, 
                                                    cut_masks_path = self.cut_dataset_masks_path, 
                                                    vis_save_path = self.gt_cut_mask_vis_path)
-            
             vismask.visual_cut_masks_in_images(images_path = self.init_dataset_images_path, 
                                                cut_masks_path = self.cut_dataset_masks_path, 
                                                vis_save_path = self.gt_mask_vis_path)
-            
         print("consume_time:", time.time() - start_time)
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description="these py file will be used to gen drrs and masks")
     parser.add_argument("-c", "--config", default="config/segmentation_config.yml", help="Path to the YAML configuration file")
+    parser.add_argument("-r", "--regenerate_specified_cts", default=["du_xiang.nii.gz"], help="The ct name list will be regenerated drrs")
+    parser.add_argument("-continue", "--continue_generating", default=True, help="if ture, Unexpected interruptions continue to be generated, otherwise, it will regenerate from none")
     args = parser.parse_args()
     return args
 
@@ -153,7 +151,10 @@ def main():
                      projection_parameter = config["projection_parameter"],
                      cut_parameter = config["cut_parameter"],
                      vis_parameter = config["vis_parameter"])
-    
+    if args.continue_generating == False:
+        shutil.rmtree(join(config["data_root_path"] , config["dataset_save_root_folder_name"], config["APorLA_orientation"]))
+    for ct_name in args.regenerate_specified_cts:
+        print(ct_name)
     dataset = SegmentationDrrDataset(config)
     dataset.create_dataset()
 

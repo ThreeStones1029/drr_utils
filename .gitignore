@@ -6,4 +6,6 @@ data/verse2019_segmentation_dataset/
 data/LiYang/
 data/Fracture/
 data/Fracture_dataset/
+data/test/
+data/test_drr/
 README_CN.md
