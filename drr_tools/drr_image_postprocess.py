@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:49:06
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-03 16:45:03
+LastEditTime: 2024-04-10 01:33:09
 '''
 import cv2
 import numpy as np
@@ -37,23 +37,17 @@ def rot_image(image_path):
 def compute_min_bbox_coverage_mask(image_path="", image=None):
     if image_path != "":
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    
     contours, _ = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
     if not contours:
         return [0, 0, 0, 0]
-
     max_bbox_area = 0
     max_bbox = cv2.boundingRect(contours[0])
-
     for contour in contours:
         bbox = cv2.boundingRect(contour)
         bbox_area = bbox[2] * bbox[3]  
-
         if bbox_area > max_bbox_area:
             max_bbox_area = bbox_area
             max_bbox = bbox
-
     return max_bbox
 
 
@@ -61,19 +55,15 @@ def compute_min_bbox_coverage_mask(image_path="", image=None):
 def compute_min_rotation_bbox_coverage_mask(image_path="", image=None):
     if image_path != "":
         image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    
     contours, _ = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
     if not contours:
         return [[0, 0, 0, 0, 0, 0, 0, 0]]
-
     # 计算每个轮廓的最小外接矩形
     rotation_rects = [cv2.minAreaRect(contour) for contour in contours]
     # 找到最大面积的最小外接矩形
     rotation_max_rect = max(rotation_rects, key=lambda x: x[1][0] * x[1][1])
     # 将最小外接矩形的四个角点转换为整数
     rotation_bbox = np.intp(cv2.boxPoints(rotation_max_rect))
-
     segmentation = [[int(rotation_bbox[0][0]), int(rotation_bbox[0][1]),
                     int(rotation_bbox[1][0]), int(rotation_bbox[1][1]),
                     int(rotation_bbox[2][0]), int(rotation_bbox[2][1]),

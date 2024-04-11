@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-08 02:41:22
+LastEditTime: 2024-04-10 02:59:51
 '''
 import sys
 import os
@@ -130,6 +130,7 @@ def conver_gt_bbox_to_fracture_annotation_file(annotation_file, fracture_record_
     gt = COCO(annotation_file)
     fracture_data = load_json_file(fracture_record_json_file)
     for image in gt.dataset["images"]:
+        print(image["ct_name"])
         single_fracture_data = fracture_data[image["ct_name"]]
         for ann in gt.imgToAnns[image["id"]]:
             ann["category_name"] = single_fracture_data[ann["category_name"]]
@@ -174,12 +175,12 @@ if __name__ == "__main__":
     # fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
     #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
     #                            "data/verse2019_segmentation_dataset/LA/verse2019_fracture_grading_info.json")
-    conver_gt_bbox_to_fracture_annotation_file("data/Fracture_dataset/LA/gt_bbox.json", 
-                                               "data/Fracture_dataset/LA/fracture_grading_info.json",
-                                               "data/Fracture_dataset/LA/fracture_gt_bbox.json")
-    split_cut_images2_fracture_and_normal_dataset("data/Fracture_dataset/LA/fracture_grading_info.json",
-                                                  "data/Fracture_dataset/LA/cut_images",
-                                                  "data/Fracture_dataset/LA/fracture_images",
-                                                  "data/Fracture_dataset/LA/normal_images")
-    print("normal images number = ", len(os.listdir("data/Fracture_dataset/LA/normal_images")))
-    print("fracture images number = ", len(os.listdir("data/Fracture_dataset/LA/fracture_images")))
+    conver_gt_bbox_to_fracture_annotation_file("data/Fracture_dataset/all/gt_bbox.json", 
+                                               "data/Fracture/fracture_grading_info.json",
+                                               "data/Fracture_dataset/all/fracture_gt_bbox.json")
+    split_cut_images2_fracture_and_normal_dataset("data/Fracture/fracture_grading_info.json",
+                                                  "data/Fracture_dataset/all/cut_images",
+                                                  "data/Fracture_dataset/all/fracture_images",
+                                                  "data/Fracture_dataset/all/normal_images")
+    print("normal images number = ", len(os.listdir("data/Fracture_dataset/all/normal_images")))
+    print("fracture images number = ", len(os.listdir("data/Fracture_dataset/all/fracture_images")))

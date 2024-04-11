@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-31 10:02:47
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-31 10:13:40
+LastEditTime: 2024-04-10 03:11:55
 '''
 import numpy as np
 import shutil
@@ -33,6 +33,6 @@ def random_choose_dataset(images_folder, save_images_folder, number):
 
 
 if __name__ == "__main__":
-    random_choose_dataset("data/verse2019_segmentation_dataset/all/normal_images",
-                          "/home/efficientnetV2/dataset/spine_fracture/normal_images",
-                          306)
+    random_choose_dataset("data/Fracture_dataset/all/normal_images",
+                          "/home/efficientnetV2/dataset/spine_fracture/all/normal_images",
+                          834)

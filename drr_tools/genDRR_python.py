@@ -4,10 +4,11 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-02-04 00:33:09
 LastEditors: ShuaiLei
-LastEditTime: 2024-02-05 12:37:57
+LastEditTime: 2024-04-10 02:11:10
 '''
 import itk
 import math
+import time
 
 
 def generate_drr(rx, ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, o2Dy, threshold, ct_file_path, drr_save_path):
@@ -91,8 +92,10 @@ def generate_drr(rx, ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, 
 
     # 设置滤波器的输出原点
     origin = filter.GetOutputOrigin()
-    origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0) / 2.0
-    origin[1] = imOrigin[1] + o2Dy - sy * (dy - 1.0) / 2.0
+    # origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0) / 2.0
+    # origin[1] = imOrigin[1] + o2Dy - sy * (dy - 1.0) / 2.0
+    origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0)
+    origin[1] = imOrigin[1] + o2Dx - sx * (dy - 1.0)
     origin[2] = imOrigin[2] + sid / 2.0
     filter.SetOutputOrigin(origin)
 
@@ -103,7 +106,7 @@ def generate_drr(rx, ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, 
     rescaler.SetInput(filter.GetOutput())
     # 创建图像文件写入器
     writer = itk.ImageFileWriter[OutputImageType].New()
-    # 注册PNGImageIO工厂
+    # 新建png对象
     pngIO1 = itk.PNGImageIO.New()
     # 设置文件路径
     writer.SetFileName(drr_save_path)
@@ -121,9 +124,10 @@ def generate_drr(rx, ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, 
         print(err)
 
 # Example usage:
+start_time = time.time()
 rx_value = 90.0
 ry_value = 180.0
-rz_value = 180.0
+rz_value = 90.0
 tx_value = 0.0
 ty_value = 0.0
 tz_value = 0.0
@@ -138,11 +142,12 @@ dy_value = 512
 o2Dx_value = 0.0
 o2Dy_value = 0.0
 threshold_value = 0.0
-ct_file_path = "data/verse/verse835/verse835.nii.gz"
-drr_save_path = "data/verse/verse835/drr.png"
+ct_file_path = "data/verse2020/verse005/verse005.nii.gz"
+drr_save_path = "data/verse2020/verse005/verse005_drr.png"
 
 generate_drr(rx_value, ry_value, rz_value, tx_value, ty_value, tz_value,
              cx_value, cy_value, cz_value, sid_value,
              sx_value, sy_value, dx_value, dy_value,
              o2Dx_value, o2Dy_value, threshold_value,
              ct_file_path, drr_save_path)
+print(time.time() - start_time)
