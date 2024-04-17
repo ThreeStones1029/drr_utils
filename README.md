@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-09 06:16:05
+ * @LastEditTime: 2024-04-17 01:00:10
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -19,22 +19,30 @@
 This repository mainly uses ITK to generate DRR, as well as the corresponding keypoints, detection boxes, and segmentation mask annotations. The generated dataset can be used for pre-trained model training to improve the robustness of deep learning.
 
 # How to Using
-## Preliminary preparation
+<details>
+<summary>Preliminary preparation</summary>
+
 ### ITK tool installation
 [Official zip download address](https://docs.itk.org/en/latest/download.html)\
 windows：You can skip this step without installing ITK.\
 linux：Need to compile and install ITK tool, for specific installation can refer to [itkSoftwareGuide.](https://itk.org/ItkSoftwareGuide.pdf)\
 [Here is my install process](document/Ubuntu_ITK_install.md).
+</details>
 
-## Dataset preparation
+
+<details>
+<summary>Dataset preparation</summary>
+
 [ct dataset format preparation tutorial](document/Dataset_prepare.md)
+</details>
 
-## Detection(Each vertebra is separated in mask format)
+<details>
+<summary>Detection(Each vertebra is separated in mask format)</summary>
+
 ### Dataset generation
-Running the command:
-~~~python
+```bash
 python main_drr_detection_dataset.py -c config/detection_config.yml
-~~~
+```
 
 ### Parameter Configuration Description(detection_config.yml)
 [Detection datasets to generate specific parameter descriptions](document/Detection_parameter_configuration_description.md)
@@ -58,11 +66,17 @@ python main_drr_detection_dataset.py -c config/detection_config.yml -r all # if 
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
     <img src="data/verse2020_detection_dataset/bbox_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
 </div>
+</details>
 
-## Detection(verse mask format)
+<details>
+<summary>Detection(verse mask format)</summary>
 To be updated!
+</details>
 
-## Segmantation(Each vertebra is separated in mask format)
+
+<details>
+<summary>Segmantation(Each vertebra is separated in mask format)</summary>
+
 ### Dataset generation
 Running the command:
 ~~~python
@@ -90,18 +104,26 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r all
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
     <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
 </div>
+</details>
 
-## Segmantation(verse mask format)
+<details>
+<summary>Segmantation(verse mask format)</summary>
 to be updated!
+</details>
 
-## Visualize 3d mask and point in 2d image.
-### run command
-~~~bash
+<details>
+<summary>Visualize 3d mask and point in 2d image.</summary>
+
+```bash
 python visual_tools/vis_3d_point_and_mask.py
-~~~
+```
+
 ### 3D points and mask project in 2D image.
 ![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
+</details>
 
-## 3D visualization
+<details>
+<summary>3D visualization.</summary>
 To be updated
+</details>
 
