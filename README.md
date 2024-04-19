@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-17 01:00:10
+ * @LastEditTime: 2024-04-19 01:28:55
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -18,7 +18,20 @@
 # Introduction
 This repository mainly uses ITK to generate DRR, as well as the corresponding keypoints, detection boxes, and segmentation mask annotations. The generated dataset can be used for pre-trained model training to improve the robustness of deep learning.
 
-# How to Using
+## TODO
+<details>
+<summary> see details </summary>
+
+- [x] Detection(verse mask format)
+- [x] Segmantation(verse mask format)
+- [x] Keypoints dataset generate
+- [x] 3D visualization
+
+</details>
+
+
+
+# Quick start
 <details>
 <summary>Preliminary preparation</summary>
 
@@ -68,11 +81,6 @@ python main_drr_detection_dataset.py -c config/detection_config.yml -r all # if 
 </div>
 </details>
 
-<details>
-<summary>Detection(verse mask format)</summary>
-To be updated!
-</details>
-
 
 <details>
 <summary>Segmantation(Each vertebra is separated in mask format)</summary>
@@ -106,10 +114,6 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r all
 </div>
 </details>
 
-<details>
-<summary>Segmantation(verse mask format)</summary>
-to be updated!
-</details>
 
 <details>
 <summary>Visualize 3d mask and point in 2d image.</summary>
@@ -120,10 +124,5 @@ python visual_tools/vis_3d_point_and_mask.py
 
 ### 3D points and mask project in 2D image.
 ![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
-</details>
-
-<details>
-<summary>3D visualization.</summary>
-To be updated
 </details>
 
