@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-02-04 00:33:09
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-10 02:11:10
+LastEditTime: 2024-04-19 11:30:37
 '''
 import itk
 import math
@@ -94,7 +94,7 @@ def generate_drr(rx, ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, 
     origin = filter.GetOutputOrigin()
     # origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0) / 2.0
     # origin[1] = imOrigin[1] + o2Dy - sy * (dy - 1.0) / 2.0
-    origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0)
+    origin[0] = imOrigin[0] + o2Dx - sx * (dx - 1.0) / 4.0 * 3
     origin[1] = imOrigin[1] + o2Dx - sx * (dy - 1.0)
     origin[2] = imOrigin[2] + sid / 2.0
     filter.SetOutputOrigin(origin)
@@ -142,8 +142,8 @@ dy_value = 512
 o2Dx_value = 0.0
 o2Dy_value = 0.0
 threshold_value = 0.0
-ct_file_path = "data/verse2020/verse005/verse005.nii.gz"
-drr_save_path = "data/verse2020/verse005/verse005_drr.png"
+ct_file_path = "data/verse2020/verse004/L1_seg.nii.gz"
+drr_save_path = "data/verse2020/verse004/L1_drr.png"
 
 generate_drr(rx_value, ry_value, rz_value, tx_value, ty_value, tz_value,
              cx_value, cy_value, cz_value, sid_value,
