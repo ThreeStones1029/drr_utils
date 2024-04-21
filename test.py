@@ -1,7 +1,16 @@
+'''
+Description: 
+version: 
+Author: ThreeStones1029 2320218115@qq.com
+Date: 2024-03-23 07:14:28
+LastEditors: ShuaiLei
+LastEditTime: 2024-04-21 07:51:04
+'''
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from drr_tools.genDRR import genDRR
+from visual_tools.vis_coco_detection_bbox import VisCoCo
 
 
 def test(origin_image_path, mask_path, cut_bbox_coordinate, save_path):
@@ -60,7 +69,13 @@ def show_drr(ctDir):
     plt.show()
 
 
+
+
+
 if __name__ == "__main__":
     # gen_512_512_drr()
-    gen_2000_2000_resize512_512(500, "/home/jjf/ITK/drr_utils/data/ct_mask/zhang_guo_quan/zhang_guo_quan.nii.gz")
+    # gen_2000_2000_resize512_512(500, "/home/jjf/ITK/drr_utils/data/ct_mask/zhang_guo_quan/zhang_guo_quan.nii.gz")
     # show_drr("/home/jjf/ITK/drr_utils/data/ct_mask/zhang_guo_quan/zhang_guo_quan.nii.gz")
+    VisCoCo(annotation_file="data/S0000328_example/voc.json", 
+            images_folder="data/S0000328_example/JPEGImages",
+            bbox_vis_folder="data/S0000328_example/vis").visualize_bboxes_in_images()

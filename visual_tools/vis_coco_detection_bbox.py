@@ -32,7 +32,7 @@ class VisCoCo(COCO):
             try:
                 self.font = ImageFont.truetype('arial.ttf', self.fontsize)
             except IOError:
-                self.font = ImageFont.load_default()
+                self.font = ImageFont.load_default(size=self.fontsize)
 
 
     def visualize_bboxes_in_images(self):
