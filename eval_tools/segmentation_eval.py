@@ -4,7 +4,7 @@ version:
 Author: ShuaiLei
 Date: 2024-01-07 16:50:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-01-13 17:18:04
+LastEditTime: 2024-04-23 07:49:25
 '''
 import os
 import sys
@@ -207,6 +207,6 @@ class SegmentationEvaluationMetrics:
 
 if __name__ == "__main__":
     # 计算Dice系数
-    pre_gt_eval = SegmentationEvaluationMetrics("/home/jjf/ITK/drr_utils/data/detection_segmentation/LA/cut_masks",
-                                                "/home/jjf/ITK/drr_utils/data/detection_segmentation/LA/segmentation_result")
+    pre_gt_eval = SegmentationEvaluationMetrics("/home/drr_utils/data/detection_segmentation/LA/cut_masks",
+                                                "/home/drr_utils/data/detection_segmentation/LA/segmentation_result")
     pre_gt_eval.calculate_images_mean_metrics()

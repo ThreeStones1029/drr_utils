@@ -4,7 +4,7 @@ version: 1.0
 Author: Shuai Lei
 Date: 2024-03-23 11:58:45
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-10 02:59:51
+LastEditTime: 2024-04-29 13:01:58
 '''
 import sys
 import os
@@ -170,7 +170,7 @@ def split_cut_images2_fracture_and_normal_dataset(fracture_record_json_file,cut_
 
 if __name__ == "__main__":
     # split_fracture_ct_dataset("data/verse2019/verse2019_fracture_grading_info.xlsx", 
-    #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])huoqu
+    #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"])
 
     # fracture_xlsx_file_to_json("data/verse2019/verse2019_fracture_grading_info.xlsx",
     #                           ["T9", "T10", "T11", "T12","L1", "L2", "L3", "L4", "L5", "L6"],
