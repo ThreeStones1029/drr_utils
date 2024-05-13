@@ -1,6 +1,7 @@
 data/deformity/
 data/deformity_drr/
 data/verse2019/
+data/verse2019_fracture/
 data/verse2019_drr/
 data/verse2019_test1/
 data/verse2019_detection_dataset/
@@ -11,4 +12,6 @@ data/Fracture_dataset/
 data/test/
 data/test_drr/
 data/S0000328_example/
+data/Local_fracture/
+data/Local_normal/
 README_CN.md
