@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-04-19 01:28:55
+ * @LastEditTime: 2024-05-14 13:54:35
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -76,8 +76,8 @@ python main_drr_detection_dataset.py -c config/detection_config.yml -r all # if 
 
 ### Example
 <div style="display: flex;">
-    <img src="data/verse2020_detection_dataset/bbox_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
-    <img src="data/verse2020_detection_dataset/bbox_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
+    <img src="data/verse2020_test_detection_dataset/bbox_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
+    <img src="data/verse2020_test_detection_dataset/bbox_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
 </div>
 </details>
 
@@ -109,8 +109,8 @@ python main_drr_segmentation_dataset.py -c config/segmentation_config.yml -r all
 
 ### Example
 <div style="display: flex;">
-    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
-    <img src="data/verse2020_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
+    <img src="data/verse2020_test_segmentation_dataset/all/gt_mask_vis/verse004_AP_1.png" alt="Image 1" width="400"; padding: 5px;">
+    <img src="data/verse2020_test_segmentation_dataset/all/gt_mask_vis/verse004_LA_1.png" alt="Image 2" width="400"; padding: 5px;">
 </div>
 </details>
 
