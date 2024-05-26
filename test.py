@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-23 07:14:28
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-21 07:51:04
+LastEditTime: 2024-05-24 01:26:53
 '''
 import cv2
 import numpy as np
@@ -76,6 +76,10 @@ if __name__ == "__main__":
     # gen_512_512_drr()
     # gen_2000_2000_resize512_512(500, "/home/jjf/ITK/drr_utils/data/ct_mask/zhang_guo_quan/zhang_guo_quan.nii.gz")
     # show_drr("/home/jjf/ITK/drr_utils/data/ct_mask/zhang_guo_quan/zhang_guo_quan.nii.gz")
-    VisCoCo(annotation_file="data/S0000328_example/voc.json", 
-            images_folder="data/S0000328_example/JPEGImages",
-            bbox_vis_folder="data/S0000328_example/vis").visualize_bboxes_in_images()
+    # VisCoCo(annotation_file="data/S0000328_example/voc.json", 
+    #         images_folder="data/S0000328_example/JPEGImages",
+    #         bbox_vis_folder="data/S0000328_example/vis").visualize_bboxes_in_images()
+    import matplotlib.pyplot as plt
+
+    plt.plot(range(10))
+    plt.show()
