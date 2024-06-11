@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-02-04 00:33:09
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-19 11:30:37
+LastEditTime: 2024-06-04 12:03:30
 '''
 import itk
 import math
@@ -142,8 +142,8 @@ dy_value = 512
 o2Dx_value = 0.0
 o2Dy_value = 0.0
 threshold_value = 0.0
-ct_file_path = "data/verse2020/verse004/L1_seg.nii.gz"
-drr_save_path = "data/verse2020/verse004/L1_drr.png"
+ct_file_path = "data/verse2020_test/verse004/verse004.nii.gz"
+drr_save_path = "data/verse2020_test/verse004/L1_drr.png"
 
 generate_drr(rx_value, ry_value, rz_value, tx_value, ty_value, tz_value,
              cx_value, cy_value, cz_value, sid_value,
