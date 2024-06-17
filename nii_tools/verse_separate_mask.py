@@ -106,5 +106,5 @@ def ct_dataset_statistics(ct_dataset_path, statistics_information_json_path):
 
 
 if __name__ == "__main__":
-    format_conver = VerseFormatConver("data/verse2019_test1")
+    format_conver = VerseFormatConver("data/verse2020_fracture")
     format_conver.run()
