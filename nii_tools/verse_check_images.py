@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-29 08:26:20
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-29 12:16:11
+LastEditTime: 2024-06-17 03:20:51
 '''
 import os
 import sys
@@ -89,4 +89,4 @@ def split_sub_folder(sub_folder_path):
 
 
 if __name__ == "__main__":
-    check_root_folder("data/verse2019_test1")
+    check_root_folder("data/verse2020_fracture")

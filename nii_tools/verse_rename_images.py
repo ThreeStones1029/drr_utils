@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-29 09:01:25
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-29 12:22:48
+LastEditTime: 2024-06-17 06:21:14
 '''
 import os
 import sys
@@ -41,7 +41,7 @@ def rename_verse2020_cts(root_path):
         for file in os.listdir(sub_folder_path):
             if file.endswith("seg.nii.gz"):
                 new_file = ct_folder_name + "_seg.nii.gz"
-            if file.endswith(".nii.gz") and "seg" not in file:
+            if file.endswith("ct.nii.gz"):
                 new_file = ct_folder_name + ".nii.gz"
             if file.endswith(".png"):
                 new_file = ct_folder_name + ".png"
@@ -90,4 +90,4 @@ def rename_verse2019_cts(root_path):
 
 
 if __name__ == "__main__":
-    rename_verse2019_cts("data/verse2019_test1")
+    rename_verse2020_cts("data/verse2020_fracture")
