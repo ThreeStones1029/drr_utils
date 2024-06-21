@@ -4,7 +4,7 @@ version:
 Author: 
 Date: 2024-03-23 07:14:28
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-17 03:10:12
+LastEditTime: 2024-06-21 02:55:19
 '''
 import sys
 import os
@@ -127,9 +127,11 @@ def reoriented_images(input_folder, output_folder):
             reoriented.Update()
             itk.imwrite(reoriented, join(sub_output_folder, basename_wo_ext + '.nii.gz'))
             reoriented_nib = nib.load(join(sub_output_folder, basename_wo_ext + '.nii.gz'))
-            reorient_points(json_file_paths[0], reoriented_nib)
+            if len(json_file_paths) > 0:
+                reorient_points(json_file_paths[0], reoriented_nib)
             print(join(sub_output_folder, basename_wo_ext + '.nii.gz'),"conver to RAI coordinate succeccfully!\n")
 
 
 if __name__ == "__main__":
-    reoriented_images("data/verse2020_fracture","data/verse2020_fracture")
+    # reoriented_images("data/verse2020_fracture","data/verse2020_fracture")
+    reoriented_images("data/TD_fracture","data/TD_fracture")

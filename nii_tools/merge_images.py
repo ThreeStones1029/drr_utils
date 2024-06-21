@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-28 07:39:57
 LastEditors: ShuaiLei
-LastEditTime: 2024-03-28 12:09:39
+LastEditTime: 2024-06-21 06:07:01
 '''
 import os
 import sys
@@ -13,7 +13,7 @@ project_root = os.path.dirname(os.path.dirname(current_file_path))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 import SimpleITK as sitk
-from drr_utils.nii_tools.verse_separate_mask import VerseCategoriesFormat
+from nii_tools.verse_separate_mask import VerseCategoriesFormat
 
 
 def sitk_merge_masks(image_path, mask_path_list, merged_mask_nii_path):
