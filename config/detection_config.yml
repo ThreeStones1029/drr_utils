@@ -5,21 +5,21 @@
 # dataset_masks_path: data/detection_test/masks
 # dataset_json_path: data/detection_test/detection_data.json
 
-projection_parameter:
-  sdr: 500
-  height: 2000
-  specific_height_list: {"chen_jing": 3000, "chen_min_hua": 2500, "hang_hui_fang": 1000, "wang_xing_di": 1000, "xu_ye": 3000, "zhang_jian_min": 2500, "zhou_yuan_ying": 1000}
-  delx: 0.25
-  threshold: 0
-  AP_num_samples: 1
-  LA_num_samples: 1
-  AP_rot_range_list: [[75, 105], [-180, 180], [165, 195]]
-  AP_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
-  LA_rot_range_list: [[75, 105], [-180, 180], [75, 105]]
-  LA_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
-  AP_bbox_label_type: small
-  LA_bbox_label_type: big
-  min_bbox_percentage_of_height: 0.05
+# projection_parameter:
+#   sdr: 500
+#   height: 2000
+#   specific_height_list: {"chen_jing": 3000, "chen_min_hua": 2500, "hang_hui_fang": 1000, "wang_xing_di": 1000, "xu_ye": 3000, "zhang_jian_min": 2500, "zhou_yuan_ying": 1000}
+#   delx: 0.25
+#   threshold: 0
+#   AP_num_samples: 1
+#   LA_num_samples: 1
+#   AP_rot_range_list: [[75, 105], [-180, 180], [165, 195]]
+#   AP_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
+#   LA_rot_range_list: [[75, 105], [-180, 180], [75, 105]]
+#   LA_trans_range_list: [[-30, 30], [-30, 30], [-30, 30]]
+#   AP_bbox_label_type: small
+#   LA_bbox_label_type: big
+#   min_bbox_percentage_of_height: 0.05
 
 
 # vis_parameter:

@@ -84,11 +84,7 @@ class VisCoCo(COCO):
                 xmin, ymin, w, h = bbox
                 xmax = xmin + w
                 ymax = ymin + h
-                draw.line(
-                    [(xmin, ymin), (xmin, ymax), (xmax, ymax), (xmax, ymin),
-                    (xmin, ymin)],
-                    width=2,
-                    fill='red')
+                draw.line([(xmin, ymin), (xmin, ymax), (xmax, ymax), (xmax, ymin),(xmin, ymin)],width=2,fill='red')
             else:
                 print('the shape of bbox must be [M, 4]')
 
@@ -175,7 +171,7 @@ class VisCoCo(COCO):
             #                         [rotate_bbox[0][4], rotate_bbox[0][5]],
             #                         [rotate_bbox[0][6], rotate_bbox[0][7]]])
             # (xmin, ymin) = np.min(rect_points, axis=0)
-            xmin, ymin = rotate_bbox[0][0], rotate_bbox[0][1]
+            # xmin, ymin = rotate_bbox[0][0], rotate_bbox[0][1]
             # draw label
             if self.categories_id2name:
                 text = "{} ".format(self.categories_id2name[catid])
@@ -185,12 +181,14 @@ class VisCoCo(COCO):
             # tw, th = draw.textsize(text)
             left, top, right, bottom = draw.textbbox((0, 0), text, font=self.font)
             tw, th = right - left, bottom - top
+            # 得到在bbox中心左边的两个点坐标，获取其中y更小的作为标签的开始坐标
+            label_x_start, label_y_start = self.get_label_start(rotate_bbox)
             #label框
-            draw.rectangle([(xmin + 1, ymin + 1), (xmin + tw + 1, ymin + th + 1 + 10)], fill='white') 
-            # draw.rectangle([(xmin + 1, ymin - th), (xmin + tw + 1, ymin)], fill = color)
+            draw.rectangle([(label_x_start - tw / 2, label_y_start - th/2), (label_x_start + tw, label_y_start + th + 10)], fill='white') 
+
             # label文字 
             # (xmin + 1, ymin - th)
-            draw.text((xmin + 1, ymin + 1), text, fill='red',font=self.font) 
+            draw.text((label_x_start - tw / 2, label_y_start - th/2), text, fill='red',font=self.font) 
             # draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
         return image
     
@@ -229,3 +227,9 @@ class VisCoCo(COCO):
                 self.categories_id2name[cat['id']] = cat["name"]
                 self.categories_name2id[cat['name']] = cat["id"]
 
+
+    def get_label_start(self, rotate_bbox):
+        x_center = (rotate_bbox[0][0] + rotate_bbox[0][4]) / 2
+        y_center = (rotate_bbox[0][1] + rotate_bbox[0][5]) / 2
+        return x_center, y_center
+        

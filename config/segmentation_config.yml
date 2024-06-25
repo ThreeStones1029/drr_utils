@@ -1,5 +1,5 @@
 data_root_path: data
-ct_mask_path: data/TD_fracture
+ct_mask_path: data/Local_fracture
 dataset_save_root_folder_name: Fracture_dataset
 APorLA_orientation: LA # AP LA all
 mask_categories: ["body"] # whole body pedicle other
