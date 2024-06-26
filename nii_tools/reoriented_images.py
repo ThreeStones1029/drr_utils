@@ -4,7 +4,7 @@ version:
 Author: 
 Date: 2024-03-23 07:14:28
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-21 02:55:19
+LastEditTime: 2024-06-26 07:34:23
 '''
 import sys
 import os
@@ -48,6 +48,28 @@ def load_centroids(ctd_path):
         else:
             ctd_list.append([d['label'], d['X'], d['Y'], d['Z']]) 
     return ctd_list
+
+
+def check_direction_and_sort_XYZ(ctd_path, direction):
+    """
+    to reoriented verse2019 dataset format.
+    """
+    dict_list = load_json_file(ctd_path)
+    json_direction = None
+    for d in dict_list:
+        if 'direction' in d:
+            json_direction = tuple(d["direction"])
+        else:
+            # sort
+            d = {"label":d["label"],
+                 "X":d["X"],
+                 "Y":d["Y"],
+                 "Z":d["Z"]}
+
+    # if not exist just add
+    if json_direction == None:
+        dict_list.insert(0, {"direction": list(direction)})
+    save_json_file(dict_list, ctd_path)
 
 
 def save_centroids(ctd_list, ctd_path):
@@ -113,6 +135,13 @@ def reoriented_images(input_folder, output_folder):
         sub_output_folder = create_folder(join(output_folder, sub_folder_name))
         nii_file_paths = get_subfiles(sub_folder_path, ".nii.gz")
         json_file_paths = get_subfiles(sub_folder_path, "json")
+        # get origin image direction
+        for nii_file_path in nii_file_paths:
+            # get origin image direction
+            if not nii_file_path.endswith("seg.nii.gz"):
+                nib_image = nib.load(nii_file_path)
+                origin_image_direction = nio.aff2axcodes(nib_image.affine)
+        check_direction_and_sort_XYZ(json_file_paths[0], origin_image_direction)
         for nii_file_path in nii_file_paths:
             basename = os.path.basename(nii_file_path)
             basename_wo_ext = basename[:basename.find('.nii.gz')]
@@ -134,4 +163,4 @@ def reoriented_images(input_folder, output_folder):
 
 if __name__ == "__main__":
     # reoriented_images("data/verse2020_fracture","data/verse2020_fracture")
-    reoriented_images("data/TD_fracture","data/TD_fracture")
+    reoriented_images("data/cropping","data/cropping")

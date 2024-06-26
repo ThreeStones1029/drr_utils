@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-29 09:01:25
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-17 06:21:14
+LastEditTime: 2024-06-26 02:12:58
 '''
 import os
 import sys
@@ -90,4 +90,4 @@ def rename_verse2019_cts(root_path):
 
 
 if __name__ == "__main__":
-    rename_verse2020_cts("data/verse2020_fracture")
+    rename_verse2019_cts("data/cropping")

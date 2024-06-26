@@ -184,7 +184,7 @@ class VisCoCo(COCO):
             # 得到在bbox中心左边的两个点坐标，获取其中y更小的作为标签的开始坐标
             label_x_start, label_y_start = self.get_label_start(rotate_bbox)
             #label框
-            draw.rectangle([(label_x_start - tw / 2, label_y_start - th/2), (label_x_start + tw, label_y_start + th + 10)], fill='white') 
+            # draw.rectangle([(label_x_start - tw / 2, label_y_start - th/2), (label_x_start + tw / 2, label_y_start + th / 2)], fill='white') 
 
             # label文字 
             # (xmin + 1, ymin - th)
