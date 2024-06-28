@@ -1,6 +1,6 @@
 data_root_path: data
-ct_mask_path: data/Local_fracture
-dataset_save_root_folder_name: Fracture_dataset
+ct_mask_path: data/Local
+dataset_save_root_folder_name: MinbboxDRR
 APorLA_orientation: LA # AP LA all
 mask_categories: ["body"] # whole body pedicle other
 nii_preproess: False
@@ -13,8 +13,8 @@ projection_parameter:
   specific_height_list: {}
   delx: 0.5
   threshold: 0
-  AP_num_samples: 5
-  LA_num_samples: 10
+  AP_num_samples: 1
+  LA_num_samples: 1
   AP_rot_range_list : [[85, 95], [165, 195], [175, 185]]
   AP_trans_range_list : [[-20, 20], [-20, 20], [-20, 20]]
   LA_rot_range_list: [[85, 95], [165, 195], [85, 95]]
@@ -24,7 +24,7 @@ projection_parameter:
 # Mode of clipping
 cut_parameter:
   cut_mode: mask_center # mask_center detection_bbox_center
-  detection_result_json_path: data/Fracture_dataset/LA/detection_result/bbox.json
+  detection_result_json_path: data/MinbboxDRR/LA/detection_result/bbox.json
   run_object_detection: False
   AP_expand_coefficient: 1.1
   LA_expand_coefficient: 1.1

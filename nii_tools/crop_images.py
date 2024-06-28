@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 2320218115@qq.com
 Date: 2024-03-28 07:36:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-26 07:55:29
+LastEditTime: 2024-06-28 14:46:15
 '''
 import os
 import sys
@@ -126,11 +126,17 @@ def reorient_to_origin(image_path):
     itk.imwrite(reoriented, image_path)
 
 
+def manual_cuting(input_nii_file_path, output_nii_file_path):
+    """
+    有时候为了方便可以手动裁剪
+    """
+    image = sitk.ReadImage(input_nii_file_path)
+    size = image.GetSize()
+    image_bottom = image[:, :, 0:int(0.5 * size[2])]
+    sitk.WriteImage(image_bottom, output_nii_file_path)
+
+
 if __name__ == "__main__":
-    crop_nii_according_vertebrae_label("data/test",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"],is_crop_pelvis=True)
-    # image = sitk.ReadImage("data/verse2019/sub-verse009bottom/sub-verse009bottom.nii.gz")
-    # mask = sitk.ReadImage("data/verse2019/sub-verse009bottom/L1_seg.nii.gz")
-    # print(image.GetSize())
-    # print(image.GetSpacing())
-    # print(mask.GetSize())
+    # crop_nii_according_vertebrae_label("data/test",["T9", "T10", "T11", "T12", "L1", "L2", "L3", "L4", "L5", "L6"],is_crop_pelvis=True)
+    manual_cuting("data/test/yang_zhen_mei/yang_zhen_mei.nii.gz", "data/test/yang_zhen_mei/yang_zhen_mei_bottom.nii.gz")
     

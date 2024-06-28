@@ -4,7 +4,7 @@ version:
 Author: 
 Date: 2024-03-23 07:14:28
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-26 07:34:23
+LastEditTime: 2024-06-28 14:30:23
 '''
 import sys
 import os
@@ -141,7 +141,8 @@ def reoriented_images(input_folder, output_folder):
             if not nii_file_path.endswith("seg.nii.gz"):
                 nib_image = nib.load(nii_file_path)
                 origin_image_direction = nio.aff2axcodes(nib_image.affine)
-        check_direction_and_sort_XYZ(json_file_paths[0], origin_image_direction)
+        if len(json_file_paths) > 0:
+            check_direction_and_sort_XYZ(json_file_paths[0], origin_image_direction)
         for nii_file_path in nii_file_paths:
             basename = os.path.basename(nii_file_path)
             basename_wo_ext = basename[:basename.find('.nii.gz')]
@@ -163,4 +164,4 @@ def reoriented_images(input_folder, output_folder):
 
 if __name__ == "__main__":
     # reoriented_images("data/verse2020_fracture","data/verse2020_fracture")
-    reoriented_images("data/cropping","data/cropping")
+    reoriented_images("data/test","data/test")

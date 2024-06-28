@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-11 11:21:50
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 08:21:55
+LastEditTime: 2024-06-28 05:45:13
 '''
 from datetime import datetime
 from io_tools.file_management import load_json_file, save_json_file
@@ -74,6 +74,9 @@ class COCODetectionData:
                             "supercategory": "vertebrae"},
                             {"id": 10,
                             "name": "T9",
+                            "supercategory": "vertebrae"},
+                            {"id": 11,
+                            "name": "T8",
                             "supercategory": "vertebrae"}]
         
         for category in self.categories:
