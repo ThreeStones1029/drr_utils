@@ -1,7 +1,7 @@
 data_root_path: data
 ct_mask_path: data/Local
 dataset_save_root_folder_name: MinbboxDRR
-APorLA_orientation: LA # AP LA all
+APorLA_orientation: all # AP LA all
 mask_categories: ["body"] # whole body pedicle other
 nii_preproess: False
 has_pedicle: True
@@ -10,11 +10,11 @@ has_pedicle: True
 projection_parameter:
   sdr: 500
   height: 1000
-  specific_height_list: {}
+  specific_height_list: {"hang_hui_fang": 500, "ji_lai_ying": 500, "liu_xin": 500, "rui_guo_fa": 500, "teng_jin_fa": 500, "wang_xing_di": 500, "yan_gen_ying": 500, "zhou_yuan_ying": 500}
   delx: 0.5
   threshold: 0
-  AP_num_samples: 1
-  LA_num_samples: 1
+  AP_num_samples: 15
+  LA_num_samples: 15
   AP_rot_range_list : [[85, 95], [165, 195], [175, 185]]
   AP_trans_range_list : [[-20, 20], [-20, 20], [-20, 20]]
   LA_rot_range_list: [[85, 95], [165, 195], [85, 95]]
