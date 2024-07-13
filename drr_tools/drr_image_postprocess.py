@@ -4,10 +4,13 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:49:06
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-10 01:33:09
+LastEditTime: 2024-07-13 08:36:08
 '''
 import cv2
 import numpy as np
+import os
+from tqdm import tqdm
+from PIL import Image
 
 
 def flipdrr(image_path):
@@ -19,6 +22,20 @@ def flipdrr(image_path):
                 pixel = image[row, col, c]
                 image[row, col, c] = 255-pixel
     cv2.imwrite(image_path, image)
+
+
+def blackwhite_inverse_images(image_path_list):
+    """
+    The function will flip black and white.
+    param: image_path
+    """
+    for image_path in tqdm(image_path_list, desc="inversing"):
+        image = Image.open(image_path)
+        image_array = np.array(image)
+        max_pixel_value = image_array.max()
+        new_imaeg_array = max_pixel_value - image_array
+        new_image = Image.fromarray(new_imaeg_array)
+        new_image.save(image_path)
 
 
 def gen_2D_mask(img_path):
