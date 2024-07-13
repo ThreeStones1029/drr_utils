@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-07-13 11:06:53
+ * @LastEditTime: 2024-07-13 12:29:35
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -135,7 +135,8 @@ python main_3d_vis.py
 ### Example
 ![single view](document/single_open3d.png)
 ![multi view](document/multi_open3d.png)
-
+![detection view](document/verse004_detection_example.png)
+![segmentation view](document/verse004_segmentation_example.png)
 </details>
 
 
