@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-05-14 13:54:35
+ * @LastEditTime: 2024-07-13 11:06:53
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -25,7 +25,7 @@ This repository mainly uses ITK to generate DRR, as well as the corresponding ke
 - [x] Detection(verse mask format)
 - [x] Segmantation(verse mask format)
 - [x] Keypoints dataset generate
-- [x] 3D visualization
+- [x] 3D visualization(complete!)
 
 </details>
 
@@ -125,4 +125,17 @@ python visual_tools/vis_3d_point_and_mask.py
 ### 3D points and mask project in 2D image.
 ![3D point and mask](data/verse2019_test/sub-verse012/sub-verse012_verse.png)
 </details>
+
+<details>
+<summary>open3d visualize</summary>
+
+```bash
+python main_3d_vis.py
+```
+### Example
+![single view](document/single_open3d.png)
+![multi view](document/multi_open3d.png)
+
+</details>
+
 
