@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-07-13 13:01:13
+ * @LastEditTime: 2024-07-13 13:02:53
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -15,7 +15,7 @@
 
 
 ![drr_utils_examples](document/drr_utils.png)
-open3d vis
+# Open3d Visualization
 <div style="display: flex;">
     <img src="document/verse004_detection_example.png" alt="Image 1" width="400"; padding: 5px;">
     <img src="document/verse004_segmentation_example.png" alt="Image 2" width="415"; padding: 5px;">
