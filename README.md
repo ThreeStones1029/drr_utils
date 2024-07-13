@@ -18,7 +18,7 @@
 open3d vis
 <div style="display: flex;">
     <img src="document/verse004_detection_example.png" alt="Image 1" width="400"; padding: 5px;">
-    <img src="document/verse004_segmentation_example.png" alt="Image 2" width="410"; padding: 5px;">
+    <img src="document/verse004_segmentation_example.png" alt="Image 2" width="415"; padding: 5px;">
 </div>
 
 # Introduction
