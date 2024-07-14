@@ -4,7 +4,7 @@
  * @Author: ThreeStones1029 2320218115@qq.com
  * @Date: 2024-03-26 12:44:24
  * @LastEditors: ShuaiLei
- * @LastEditTime: 2024-07-13 13:02:53
+ * @LastEditTime: 2024-07-14 12:23:06
 -->
 <h2 align="center">Deep Learning Spine DRR Toolkit</h2>
 <p align="center">
@@ -31,7 +31,7 @@ This repository mainly uses ITK to generate DRR, as well as the corresponding ke
 - [x] Detection(verse mask format)
 - [x] Segmantation(verse mask format)
 - [x] Keypoints dataset generate
-- [x] 3D visualization(complete!)
+- [x] 3D visualization(2024-07-13-complete!)
 
 </details>
 
