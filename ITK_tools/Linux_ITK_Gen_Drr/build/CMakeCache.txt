@@ -28,7 +28,7 @@ CMAKE_BUILD_TYPE:STRING=
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
-CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
+CMAKE_CXX_COMPILER:STRING=/usr/bin/c++
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -54,7 +54,7 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
 //C compiler
-CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
+CMAKE_C_COMPILER:STRING=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -232,6 +232,7 @@ CMAKE_CACHEFILE_DIR:INTERNAL=/home/jjf/Desktop/drr_utils/ITK_tools/Linux_ITK_Gen
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
+<<<<<<< HEAD
 CMAKE_CACHE_MINOR_VERSION:INTERNAL=16
 //Patch version of cmake used to create the current loaded cache
 CMAKE_CACHE_PATCH_VERSION:INTERNAL=3
@@ -243,6 +244,19 @@ CMAKE_COMMAND:INTERNAL=/usr/bin/cmake
 CMAKE_CPACK_COMMAND:INTERNAL=/usr/bin/cpack
 //Path to ctest program executable.
 CMAKE_CTEST_COMMAND:INTERNAL=/usr/bin/ctest
+=======
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=29
+//Patch version of cmake used to create the current loaded cache
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=2
+//ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
+CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
+//Path to CMake executable.
+CMAKE_COMMAND:INTERNAL=/root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cmake
+//Path to cpack program executable.
+CMAKE_CPACK_COMMAND:INTERNAL=/root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cpack
+//Path to ctest program executable.
+CMAKE_CTEST_COMMAND:INTERNAL=/root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/ctest
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 //ADVANCED property for variable: CMAKE_CXX_COMPILER
 CMAKE_CXX_COMPILER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_CXX_COMPILER_AR
@@ -337,7 +351,11 @@ CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_READELF
 CMAKE_READELF-ADVANCED:INTERNAL=1
 //Path to CMake installation.
+<<<<<<< HEAD
 CMAKE_ROOT:INTERNAL=/usr/share/cmake-3.16
+=======
+CMAKE_ROOT:INTERNAL=/root/anaconda3/lib/python3.11/site-packages/cmake/data/share/cmake-3.29
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG

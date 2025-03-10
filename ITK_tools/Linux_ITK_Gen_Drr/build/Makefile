@@ -39,10 +39,17 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
+<<<<<<< HEAD
 CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
 RM = /usr/bin/cmake -E remove -f
+=======
+CMAKE_COMMAND = /root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cmake
+
+# The command to remove a file.
+RM = /root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cmake -E rm -f
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 
 # Escaping for special characters.
 EQUALS = =
@@ -56,10 +63,27 @@ CMAKE_BINARY_DIR = /home/jjf/Desktop/drr_utils/ITK_tools/Linux_ITK_Gen_Drr/build
 #=============================================================================
 # Targets provided globally by CMake.
 
+<<<<<<< HEAD
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
 	/usr/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+=======
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "No interactive CMake dialog available..."
+	/root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+.PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
+	/root/anaconda3/lib/python3.11/site-packages/cmake/data/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -115,39 +139,68 @@ depend:
 
 # Build rule for target.
 itk_multi_drrs: cmake_check_build_system
+<<<<<<< HEAD
 	$(MAKE) -f CMakeFiles/Makefile2 itk_multi_drrs
+=======
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 itk_multi_drrs
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : itk_multi_drrs
 
 # fast build rule for target.
 itk_multi_drrs/fast:
+<<<<<<< HEAD
 	$(MAKE) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/build
 .PHONY : itk_multi_drrs/fast
 
 gen_multidrrs.o: gen_multidrrs.cpp.o
 
+=======
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/build
+.PHONY : itk_multi_drrs/fast
+
+gen_multidrrs.o: gen_multidrrs.cpp.o
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : gen_multidrrs.o
 
 # target to build an object file
 gen_multidrrs.cpp.o:
+<<<<<<< HEAD
 	$(MAKE) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.o
 .PHONY : gen_multidrrs.cpp.o
 
 gen_multidrrs.i: gen_multidrrs.cpp.i
 
+=======
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.o
+.PHONY : gen_multidrrs.cpp.o
+
+gen_multidrrs.i: gen_multidrrs.cpp.i
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : gen_multidrrs.i
 
 # target to preprocess a source file
 gen_multidrrs.cpp.i:
+<<<<<<< HEAD
 	$(MAKE) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.i
 .PHONY : gen_multidrrs.cpp.i
 
 gen_multidrrs.s: gen_multidrrs.cpp.s
 
+=======
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.i
+.PHONY : gen_multidrrs.cpp.i
+
+gen_multidrrs.s: gen_multidrrs.cpp.s
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : gen_multidrrs.s
 
 # target to generate assembly for a file
 gen_multidrrs.cpp.s:
+<<<<<<< HEAD
 	$(MAKE) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.s
+=======
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/itk_multi_drrs.dir/build.make CMakeFiles/itk_multi_drrs.dir/gen_multidrrs.cpp.s
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 .PHONY : gen_multidrrs.cpp.s
 
 # Help Target
@@ -157,7 +210,10 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+<<<<<<< HEAD
 	@echo "... edit_cache"
+=======
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 	@echo "... itk_multi_drrs"
 	@echo "... gen_multidrrs.o"
 	@echo "... gen_multidrrs.i"

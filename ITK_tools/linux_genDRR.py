@@ -4,7 +4,11 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:51:28
 LastEditors: ShuaiLei
+<<<<<<< HEAD
 LastEditTime: 2024-07-13 14:43:53
+=======
+LastEditTime: 2024-07-13 08:32:55
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 '''
 import ctypes
 import numpy as np
@@ -72,7 +76,10 @@ def linuxgenDRR(sdr, height, delx, threshold, rotation, translation, ctDir, save
     lib_itk.Generate_drr(rx,ry, rz, tx, ty, tz, cx, cy, cz, sid, sx, sy, dx, dy, o2Dx, o2Dy, threshold, ct_file_path.encode('utf-8'), drr_save_path.encode('utf-8'))
 
 
+<<<<<<< HEAD
                 
+=======
+>>>>>>> e4cabe67df4300438505cc494d7a991b10bae731
 def linuxgen_multiDRRs(sdr, height, delx, threshold, rotations, translations, ctDir, save_images_folder):
     # 源到成像平面的距离（即源与检测器之间的距离）
     sid = sdr * 2

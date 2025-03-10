@@ -4,7 +4,7 @@ version: 1.0
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-10 14:11:27
 LastEditors: ShuaiLei
-LastEditTime: 2024-07-13 15:09:30
+LastEditTime: 2025-03-10 20:12:09
 '''
 import platform
 from ITK_tools.linux_genDRR import linuxgenDRR, linuxgen_multiDRRs
