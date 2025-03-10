@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
   "CMakeFiles/itk_drr.dir/gendrr.cpp.o"
-  "CMakeFiles/itk_drr.dir/gendrr.cpp.o.d"
   "libitk_drr.pdb"
   "libitk_drr.so"
 )

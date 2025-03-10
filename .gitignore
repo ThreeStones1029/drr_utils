@@ -7,6 +7,11 @@ data/verse2019_test1/
 data/verse2019_detection_dataset/
 data/verse2019_segmentation_dataset/
 data/verse2020_fracture/
+data/verse2019_origin/
+data/detection_dataset/
+data/detection_segmentation/
+data/paxray/
+data/ct_mask/
 data/LiYang/
 data/Fracture/
 data/Fracture_dataset/

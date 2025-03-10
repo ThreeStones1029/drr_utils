@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *         http://www.apache.org/licenses/LICENSE-2.0.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ namespace itk {
 class TransformIOFactoryRegisterManager
 {
   public:
-  explicit TransformIOFactoryRegisterManager(void (* const list[])(void))
+  TransformIOFactoryRegisterManager(void (*list[])(void))
     {
-    for(;*list != nullptr; ++list)
+    for(;*list; ++list)
       {
       (*list)();
       }
@@ -45,11 +45,14 @@ void  HDF5TransformIOFactoryRegister__Private();void  MatlabTransformIOFactoryRe
 // application translation units. Note that this code will be expanded in the
 // ITK-based applications and not in ITK itself.
 //
+namespace {
 
-void (* const TransformIOFactoryRegisterRegisterList[])(void) = {
-  HDF5TransformIOFactoryRegister__Private,MatlabTransformIOFactoryRegister__Private,TxtTransformIOFactoryRegister__Private,
-  nullptr};
-const TransformIOFactoryRegisterManager TransformIOFactoryRegisterManagerInstance(TransformIOFactoryRegisterRegisterList);
+  void (*TransformIOFactoryRegisterRegisterList[])(void) = {
+    HDF5TransformIOFactoryRegister__Private,MatlabTransformIOFactoryRegister__Private,TxtTransformIOFactoryRegister__Private,
+    nullptr};
+  TransformIOFactoryRegisterManager TransformIOFactoryRegisterManagerInstance(TransformIOFactoryRegisterRegisterList);
+
+}
 
 }
 

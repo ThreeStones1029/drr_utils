@@ -6,7 +6,7 @@
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
  *
- *         https://www.apache.org/licenses/LICENSE-2.0.txt
+ *         http://www.apache.org/licenses/LICENSE-2.0.txt
  *
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -24,9 +24,9 @@ namespace itk {
 class ImageIOFactoryRegisterManager
 {
   public:
-  explicit ImageIOFactoryRegisterManager(void (* const list[])(void))
+  ImageIOFactoryRegisterManager(void (*list[])(void))
     {
-    for(;*list != nullptr; ++list)
+    for(;*list; ++list)
       {
       (*list)();
       }
@@ -45,11 +45,14 @@ void  BMPImageIOFactoryRegister__Private();void  BioRadImageIOFactoryRegister__P
 // application translation units. Note that this code will be expanded in the
 // ITK-based applications and not in ITK itself.
 //
+namespace {
 
-void (* const ImageIOFactoryRegisterRegisterList[])(void) = {
-  BMPImageIOFactoryRegister__Private,BioRadImageIOFactoryRegister__Private,Bruker2dseqImageIOFactoryRegister__Private,GDCMImageIOFactoryRegister__Private,GE4ImageIOFactoryRegister__Private,GE5ImageIOFactoryRegister__Private,GiplImageIOFactoryRegister__Private,HDF5ImageIOFactoryRegister__Private,JPEGImageIOFactoryRegister__Private,JPEG2000ImageIOFactoryRegister__Private,LSMImageIOFactoryRegister__Private,MINCImageIOFactoryRegister__Private,MRCImageIOFactoryRegister__Private,MetaImageIOFactoryRegister__Private,NiftiImageIOFactoryRegister__Private,NrrdImageIOFactoryRegister__Private,PNGImageIOFactoryRegister__Private,StimulateImageIOFactoryRegister__Private,TIFFImageIOFactoryRegister__Private,VTKImageIOFactoryRegister__Private,
-  nullptr};
-const ImageIOFactoryRegisterManager ImageIOFactoryRegisterManagerInstance(ImageIOFactoryRegisterRegisterList);
+  void (*ImageIOFactoryRegisterRegisterList[])(void) = {
+    BMPImageIOFactoryRegister__Private,BioRadImageIOFactoryRegister__Private,Bruker2dseqImageIOFactoryRegister__Private,GDCMImageIOFactoryRegister__Private,GE4ImageIOFactoryRegister__Private,GE5ImageIOFactoryRegister__Private,GiplImageIOFactoryRegister__Private,HDF5ImageIOFactoryRegister__Private,JPEGImageIOFactoryRegister__Private,JPEG2000ImageIOFactoryRegister__Private,LSMImageIOFactoryRegister__Private,MINCImageIOFactoryRegister__Private,MRCImageIOFactoryRegister__Private,MetaImageIOFactoryRegister__Private,NiftiImageIOFactoryRegister__Private,NrrdImageIOFactoryRegister__Private,PNGImageIOFactoryRegister__Private,StimulateImageIOFactoryRegister__Private,TIFFImageIOFactoryRegister__Private,VTKImageIOFactoryRegister__Private,
+    nullptr};
+  ImageIOFactoryRegisterManager ImageIOFactoryRegisterManagerInstance(ImageIOFactoryRegisterRegisterList);
+
+}
 
 }
 

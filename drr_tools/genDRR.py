@@ -4,10 +4,10 @@ version: 1.0
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-10 14:11:27
 LastEditors: ShuaiLei
-LastEditTime: 2023-12-14 15:40:42
+LastEditTime: 2024-07-13 15:09:30
 '''
 import platform
-from ITK_tools.linux_genDRR import linuxgenDRR
+from ITK_tools.linux_genDRR import linuxgenDRR, linuxgen_multiDRRs
 from ITK_tools.windows_genDRR import windowsgenDRR
 
 
@@ -16,3 +16,12 @@ def genDRR(sdr, height, delx, threshold, rotation, translation, ctDir, saveIMG):
         linuxgenDRR(sdr, height, delx, threshold, rotation, translation, ctDir, saveIMG)
     else:
         windowsgenDRR(sdr, height, delx, threshold, rotation, translation, ctDir, saveIMG)
+
+
+def gen_multiDRRs(sdr, height, delx, threshold, rotations, translations, ctDir, save_images_folder):
+    """
+    Generate multiple DRRS simultaneously
+    now only support linux
+    """
+    if platform.system().lower() == "linux":
+        linuxgen_multiDRRs(sdr, height, delx, threshold, rotations, translations, ctDir, save_images_folder)
