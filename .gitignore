@@ -1,5 +1,7 @@
 data/deformity/
 data/ct_mask/
+data/demo/
+data/demo_dataset/
 data/deformity_drr/
 data/verse2019/
 data/verse2019_fracture/

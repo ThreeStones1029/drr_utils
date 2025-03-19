@@ -4,10 +4,10 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:46:18
 LastEditors: ShuaiLei
-LastEditTime: 2024-04-09 08:26:29
+LastEditTime: 2025-03-19 19:24:54
 '''
 from drr_tools.genDRR import genDRR
-from drr_tools.drr_image_postprocess import gen_2D_mask, compute_min_bbox_coverage_mask, compute_min_rotation_bbox_coverage_mask
+from drr_tools.drr_image_postprocess import gen_2D_mask, compute_min_bbox_coverage_mask, compute_min_rotation_bbox_coverage_mask, compute_keypoints_coverage_mask
 from dataset_tools.dataset_sample import Dataset_sample
 from detection_tools.coco_detection_data import COCODetectionData
 from segmentation_tools.init_segmentation_json import InitSegmentationDatasetJson
@@ -162,14 +162,26 @@ class GenInitSegmentationDrrDataset:
             # 得到需要使用的nii文件列表
             filepaths = self.get_choosed_nii_files(ct_name, single_ct_path)
             i += 1
-            for filepath in filepaths:
+            # for filepath in filepaths:
+            #     basename = os.path.basename(filepath)
+            #     basename_wo_ext = basename[:basename.find('.nii.gz')]
+            #     if "seg" not in basename_wo_ext:
+            #         self.gen_drr(ct_name, i, rotation, translation, filepath, AP_or_LA)
+            #     else:
+            #         # 正位一般生成body 侧位可以选择生成整体或者生成body, pecidle, other三部分或者只生成body部分
+            #         self.gen_masks(basename_wo_ext, ct_name, i, rotation, translation, filepath, AP_or_LA)
+
+            for j, filepath in enumerate(filepaths):
                 basename = os.path.basename(filepath)
                 basename_wo_ext = basename[:basename.find('.nii.gz')]
-                if "seg" not in basename_wo_ext:
+                if j == 0 and "seg" not in basename_wo_ext:
+                    if not os.path.exists(filepath):
+                        filepath = os.path.join("/home/jjf/Desktop/PedScrewPlanning/data/local", ct_name, "CT", "spine", ct_name+".nii.gz")
                     self.gen_drr(ct_name, i, rotation, translation, filepath, AP_or_LA)
                 else:
                     # 正位一般生成body 侧位可以选择生成整体或者生成body, pecidle, other三部分或者只生成body部分
                     self.gen_masks(basename_wo_ext, ct_name, i, rotation, translation, filepath, AP_or_LA)
+            
                                                                                                                                                                                                     
                 
     def gen_masks(self, basename_wo_ext, ct_name, i, rotation, translation, filepath, AP_or_LA):
@@ -194,12 +206,13 @@ class GenInitSegmentationDrrDataset:
         category_id = self.detection_bbox_annotation.catname2catid[category_name]
         bbox = compute_min_bbox_coverage_mask(image_path=saveIMG)
         rotation_bbox = compute_min_rotation_bbox_coverage_mask(image_path=saveIMG)
+        keypoints = compute_keypoints_coverage_mask(image_path=saveIMG) # 计算中心点 (目前比较粗糙，需要后续优化)
         # 边缘上且太小的框排除 不在边缘都可以留下来
         if bbox[1] == 0 or bbox[1] + bbox[3] == self.height or bbox[0] == 0 or bbox[0] + bbox[2] == self.height:
             if bbox[2] >= self.height * self.min_bbox_percentage_of_height and bbox[3] >= self.height * self.min_bbox_percentage_of_height:
-                self.detection_bbox_annotation.add_annotation(mask_name, category_id, category_name, bbox, rotation_bbox, iscrowd=0)
+                self.detection_bbox_annotation.add_annotation(mask_name, category_id, category_name, bbox, rotation_bbox, keypoints, iscrowd=0)
         else:
-            self.detection_bbox_annotation.add_annotation(mask_name, category_id, category_name, bbox, rotation_bbox, iscrowd=0)
+            self.detection_bbox_annotation.add_annotation(mask_name, category_id, category_name, bbox, rotation_bbox, keypoints, iscrowd=0)
 
 
     def gen_drr(self, ct_name, i, rotation, translation, filepath, AP_or_LA):

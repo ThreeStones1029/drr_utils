@@ -107,6 +107,14 @@ class VisCoCo(COCO):
             # (xmin + 1, ymin - th)
             draw.text((xmin + 1, ymin + 1), text, fill='red', font=self.font) 
             # draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
+
+        # 可视化点
+        if "points" in annotations[0].keys():
+            radius = 5
+            for ann in annotations:
+                x = ann["points"][0][0]
+                y = ann["points"][0][1]
+                draw.ellipse((x - radius, y - radius, x + radius, y + radius), width=radius, fill='red')
         return image
     
 
@@ -152,26 +160,20 @@ class VisCoCo(COCO):
         """
         draw = ImageDraw.Draw(image)
         for ann in annotations:
-            rotate_bbox = ann['segmentation']
+            rotate_bbox = ann['rotate_bbox']
             # draw rotate_bbox
-            if len(rotate_bbox[0]) == 8:
+            if len(rotate_bbox) == 4 and len(rotate_bbox[0]) == 2:
                 # draw bbox
                 x1, y1 = rotate_bbox[0][0], rotate_bbox[0][1]
-                x2, y2 = rotate_bbox[0][2], rotate_bbox[0][3]
-                x3, y3 = rotate_bbox[0][4], rotate_bbox[0][5]
-                x4, y4 = rotate_bbox[0][6], rotate_bbox[0][7]
+                x2, y2 = rotate_bbox[1][0], rotate_bbox[1][1]
+                x3, y3 = rotate_bbox[2][0], rotate_bbox[2][1]
+                x4, y4 = rotate_bbox[3][0], rotate_bbox[3][1]
                 draw.line([(x1, y1), (x2, y2), (x3, y3), (x4, y4),(x1, y1)], width=2, fill='red')
             else:
-                print('the shape of rotation bbox shape must be [1, 8]')
+                print('the shape of rotation bbox shape must be [4, 2]')
 
         for ann in annotations:
-            catid, rotate_bbox = ann['category_id'], ann['segmentation']
-            # rect_points = np.array([[rotate_bbox[0][0], rotate_bbox[0][1]],
-            #                         [rotate_bbox[0][2], rotate_bbox[0][3]],
-            #                         [rotate_bbox[0][4], rotate_bbox[0][5]],
-            #                         [rotate_bbox[0][6], rotate_bbox[0][7]]])
-            # (xmin, ymin) = np.min(rect_points, axis=0)
-            # xmin, ymin = rotate_bbox[0][0], rotate_bbox[0][1]
+            catid, rotate_bbox = ann['category_id'], ann['rotate_bbox']
             # draw label
             if self.categories_id2name:
                 text = "{} ".format(self.categories_id2name[catid])
@@ -184,12 +186,21 @@ class VisCoCo(COCO):
             # 得到在bbox中心左边的两个点坐标，获取其中y更小的作为标签的开始坐标
             label_x_start, label_y_start = self.get_label_start(rotate_bbox)
             #label框
-            # draw.rectangle([(label_x_start - tw / 2, label_y_start - th/2), (label_x_start + tw / 2, label_y_start + th / 2)], fill='white') 
+            # draw.rectangle([(label_x_start + tw / 2, label_y_start + th/2), (label_x_start + tw , label_y_start + th)], fill='white') 
 
             # label文字 
             # (xmin + 1, ymin - th)
-            draw.text((label_x_start - tw / 2, label_y_start - th/2), text, fill='red',font=self.font) 
+            draw.text((label_x_start, label_y_start), text, fill='red',font=self.font) 
             # draw.text((xmin + 1, ymin - th), text, fill=(255, 255, 255))
+        
+        # 可视化点
+        if "points" in annotations[0].keys():
+            radius = 5
+            for ann in annotations:
+                x = ann["points"][0][0]
+                y = ann["points"][0][1]
+                draw.ellipse((x - radius, y - radius, x + radius, y + radius), width=radius, fill='red')
+
         return image
     
 
@@ -229,7 +240,7 @@ class VisCoCo(COCO):
 
 
     def get_label_start(self, rotate_bbox):
-        x_center = (rotate_bbox[0][0] + rotate_bbox[0][4]) / 2
-        y_center = (rotate_bbox[0][1] + rotate_bbox[0][5]) / 2
+        x_center = (rotate_bbox[0][0] + rotate_bbox[1][0] + rotate_bbox[2][0] + rotate_bbox[3][0]) / 4
+        y_center = (rotate_bbox[0][1] + rotate_bbox[1][1] + rotate_bbox[2][1] + rotate_bbox[3][1]) / 4
         return x_center, y_center
         

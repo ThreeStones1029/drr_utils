@@ -4,7 +4,7 @@ version:
 Author: ThreeStones1029 221620010039@hhu.edu.cn
 Date: 2023-12-05 15:49:06
 LastEditors: ShuaiLei
-LastEditTime: 2025-03-10 20:12:04
+LastEditTime: 2025-03-19 19:46:57
 '''
 import cv2
 import numpy as np
@@ -81,14 +81,34 @@ def compute_min_rotation_bbox_coverage_mask(image_path="", image=None):
     rotation_max_rect = max(rotation_rects, key=lambda x: x[1][0] * x[1][1])
     # 将最小外接矩形的四个角点转换为整数
     rotation_bbox = np.intp(cv2.boxPoints(rotation_max_rect))
-    segmentation = [[int(rotation_bbox[0][0]), int(rotation_bbox[0][1]),
-                    int(rotation_bbox[1][0]), int(rotation_bbox[1][1]),
-                    int(rotation_bbox[2][0]), int(rotation_bbox[2][1]),
-                    int(rotation_bbox[3][0]), int(rotation_bbox[3][1])]]
+    segmentation = [[int(rotation_bbox[0][0]), int(rotation_bbox[0][1])],
+                    [int(rotation_bbox[1][0]), int(rotation_bbox[1][1])],
+                    [int(rotation_bbox[2][0]), int(rotation_bbox[2][1])],
+                    [int(rotation_bbox[3][0]), int(rotation_bbox[3][1])]]
     return segmentation
- 
+
+# 计算投影点
+def compute_keypoints_coverage_mask(image_path="", image=None):
+    """
+    
+    """
+    if image_path != "":
+        image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
+        _, image = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
+    moments = cv2.moments(image, binaryImage=True)
+    if moments["m00"] != 0:
+        cx = moments["m10"] / moments["m00"]
+        cy = moments["m01"] / moments["m00"]
+    else:
+        cx, cy = None, None
+    return [cx, cy]
+    # import matplotlib.pyplot as plt
+    # plt.figure(figsize=(6, 6))
+    # plt.imshow(image, cmap='gray')
+    # plt.scatter(cx, cy, color="red", s=100, label="point")
+    # plt.show()
+
 
 if __name__ == "__main__":
     # rot_image("data/LA/images/cha_zhi_lin_1.png")
-    bbox = compute_min_bbox_coverage_mask(image_path="data/detection_dataset/masks/hu_yue_ling_AP_L5_1.png")
-    print(bbox)
+    keypoints = compute_keypoints_coverage_mask(image_path="data/detection_dataset/all/masks/ni_cheng_gui_LA_T9_body_1.png")

@@ -4,7 +4,7 @@ version:
 Author: According https://github.com/anjany/verse modify
 Date: 2024-03-25 08:57:02
 LastEditors: ShuaiLei
-LastEditTime: 2024-06-26 07:52:11
+LastEditTime: 2025-03-10 20:37:30
 '''
 import os
 import sys
@@ -227,7 +227,7 @@ def plot_sag_centroids(axs, ctd, zms):
     # requires v_dict = dictionary of mask labels
     for v in ctd[1:]:
         axs.add_patch(Circle((v[2]*zms[1], v[1]*zms[0]), 2, color=colors_itk[v[0]-1]))
-        axs.text(4, v[1]*zms[0], v_dict[v[0]], fontdict={'color': cm_itk(v[0]-1), 'weight': 'bold'})
+        axs.text(4, v[1]*zms[0], v_dict[v[0]], fontdict={'color': cm_itk(v[0]-1), 'weight': 'bold', 'size': 20})
 
 
 def plot_cor_centroids(axs, ctd, zms):
@@ -240,7 +240,7 @@ def plot_cor_centroids(axs, ctd, zms):
     # requires v_dict = dictionary of mask labels
     for v in ctd[1:]:
         axs.add_patch(Circle((v[3]*zms[2], v[1]*zms[0]), 2, color=colors_itk[v[0]-1]))
-        axs.text(4, v[1]*zms[0], v_dict[v[0]], fontdict={'color': cm_itk(v[0]-1), 'weight': 'bold'})
+        axs.text(4, v[1]*zms[0], v_dict[v[0]], fontdict={'color': cm_itk(v[0]-1), 'weight': 'bold', 'size': 20})
 
 
 def visualize_mask_and_centroid(img_iso, msk_iso, ctd_iso, zooms, vis_save_path):
@@ -303,10 +303,10 @@ if __name__ == "__main__":
     # define HU windows
     wdw_sbone = Normalize(vmin=-500, vmax=1300, clip=True)
     wdw_hbone = Normalize(vmin=-200, vmax=1000, clip=True)
-    image_path = "data/verse2020_fracture/sub-verse513/sub-verse513bottom.nii.gz"
-    mask_path = "data/verse2020_fracture/sub-verse513/sub-verse513bottom_seg.nii.gz"
-    json_path = "data/verse2020_fracture/sub-verse513/sub-verse513bottom.json"
-    vis_save_path = "data/verse2020_fracture/sub-verse513/sub-verse513bottom_vis.png"
+    image_path = "data/verse2019_origin/sub-verse265bottom/sub-verse265bottom.nii.gz"
+    mask_path = "data/verse2019_origin/sub-verse265bottom/sub-verse265_bottom_seg.nii.gz"
+    json_path = "data/verse2019_origin/sub-verse265bottom/sub-verse265.json"
+    vis_save_path = "data/verse2019_origin/sub-verse265bottom/sub-verse265bottom_vis.png"
     main(image_path, mask_path, json_path, vis_save_path)
 
     

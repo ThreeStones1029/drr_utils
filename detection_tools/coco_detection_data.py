@@ -84,7 +84,7 @@ class COCODetectionData:
             self.catname2catid[category["name"]] = category["id"]
         
 
-    def add_annotation(self, mask_file_name, category_id, category_name, bbox, rotation_bbox, iscrowd=0):
+    def add_annotation(self, mask_file_name, category_id, category_name, bbox, rotation_bbox, keypoints, iscrowd=0):
         self.annotation_num += 1
         annotation = {
             "mask_file_name": mask_file_name,
@@ -94,7 +94,8 @@ class COCODetectionData:
             "category_name": category_name,
             "area": bbox[2] * bbox[3],
             "bbox": bbox,
-            "segmentation": rotation_bbox,
+            "rotate_bbox": rotation_bbox,
+            "points": [keypoints],
             "iscrowd": iscrowd
         }
         self.annotations.append(annotation)
